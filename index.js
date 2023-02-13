@@ -49,6 +49,19 @@ function drawHead() {
   ctx.fill();
 }
 
+ctx.beginPath()
+ctx.moveTo(0, 190)
+ctx.lineTo(500, 190)
+ctx.stroke()
+ctx.beginPath()
+ctx.moveTo(175, 0)
+ctx.lineTo(175, 500)
+ctx.stroke()
+ctx.beginPath()
+ctx.moveTo(325, 0)
+ctx.lineTo(325, 500)
+ctx.stroke()
+
 canvas.addEventListener("click", (e) => {
   console.log(`${e.offsetX} ${e.offsetY}`);
 });

@@ -21,34 +21,33 @@ function debug() {
     ctx.lineTo(250, 500);
     ctx.stroke();
   } else {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 }
 
 function drawHead() {
-    ctx.beginPath();
-    // Top head
-ctx.moveTo(85, 250);
-ctx.quadraticCurveTo(75, 75, 250, 60);
-ctx.moveTo(415, 250);
-ctx.quadraticCurveTo(425, 75, 250, 60);
-// bottom half
-ctx.moveTo(85, 250);
-ctx.quadraticCurveTo(75, 425, 250, 440);
-ctx.moveTo(415, 250);
-ctx.quadraticCurveTo(425, 415, 250, 440);
-ctx.stroke();
-//mouth
-ctx.beginPath()
-ctx.fillStyle = 'pink'
-ctx.moveTo(150, 320)
-ctx.lineTo(360, 320)
-ctx.beginPath()
-ctx.moveTo(150, 320)
-ctx.quadraticCurveTo(250, 450, 360, 320)
-ctx.fill()
+  ctx.beginPath();
+  // Top head
+  ctx.moveTo(85, 250);
+  ctx.quadraticCurveTo(75, 75, 250, 60);
+  ctx.moveTo(415, 250);
+  ctx.quadraticCurveTo(425, 75, 250, 60);
+  // bottom half
+  ctx.moveTo(85, 250);
+  ctx.quadraticCurveTo(75, 425, 250, 440);
+  ctx.moveTo(415, 250);
+  ctx.quadraticCurveTo(425, 415, 250, 440);
+  ctx.stroke();
+  //mouth
+  ctx.beginPath();
+  ctx.fillStyle = "pink";
+  ctx.moveTo(150, 320);
+  ctx.lineTo(360, 320);
+  ctx.beginPath();
+  ctx.moveTo(150, 320);
+  ctx.quadraticCurveTo(250, 450, 360, 320);
+  ctx.fill();
 }
-
 
 canvas.addEventListener("click", (e) => {
   console.log(`${e.offsetX} ${e.offsetY}`);
@@ -57,9 +56,9 @@ canvas.addEventListener("click", (e) => {
 window.addEventListener("keydown", (e) => {
   if (e.key === "d") {
     clearing = !clearing;
-    debug()
-    drawHead()
+    debug();
+    drawHead();
   }
 });
 
-drawHead()
+drawHead();

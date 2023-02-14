@@ -49,6 +49,19 @@ function drawHead() {
   ctx.fill();
 }
 
+ctx.beginPath()
+ctx.moveTo(130, 190)
+ctx.quadraticCurveTo(175, 145, 225, 190)
+ctx.moveTo(130, 190)
+ctx.quadraticCurveTo(175, 230, 225, 190)
+ctx.stroke()
+ctx.beginPath()
+ctx.moveTo(285, 190)
+ctx.quadraticCurveTo(330, 145, 380, 190)
+ctx.moveTo(285, 190)
+ctx.quadraticCurveTo(330, 230, 380, 190)
+ctx.stroke()
+
 // ! EYE points
 //horitozontal
 ctx.beginPath();

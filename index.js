@@ -47,49 +47,21 @@ function drawHead() {
   ctx.moveTo(150, 320);
   ctx.quadraticCurveTo(250, 450, 360, 320);
   ctx.fill();
+  // Left eye
+  ctx.beginPath();
+  ctx.moveTo(130, 190);
+  ctx.quadraticCurveTo(185, 130, 235, 190);
+  ctx.moveTo(130, 190);
+  ctx.quadraticCurveTo(185, 235, 235, 190);
+  ctx.stroke();
+  // Right Eye
+  ctx.beginPath();
+  ctx.moveTo(275, 190);
+  ctx.quadraticCurveTo(330, 130, 380, 190);
+  ctx.moveTo(275, 190);
+  ctx.quadraticCurveTo(330, 235, 380, 190);
+  ctx.stroke();
 }
-
-ctx.beginPath()
-ctx.moveTo(130, 190)
-ctx.quadraticCurveTo(185, 130, 235, 190)
-ctx.moveTo(130, 190)
-ctx.quadraticCurveTo(185, 235, 235, 190)
-ctx.stroke()
-ctx.beginPath()
-ctx.moveTo(275, 190)
-ctx.quadraticCurveTo(330, 130, 380, 190)
-ctx.moveTo(275, 190)
-ctx.quadraticCurveTo(330, 235, 380, 190)
-ctx.stroke()
-
-// ! EYE points
-//horitozontal
-ctx.beginPath();
-ctx.moveTo(0, 190);
-ctx.lineTo(500, 190);
-// middle up
-//right
-ctx.moveTo(185, 0);
-ctx.lineTo(185, 500);
-//left
-ctx.moveTo(320, 0);
-ctx.lineTo(320, 500);
-ctx.stroke();
-//eye end
-ctx.beginPath();
-// left start and stop
-ctx.moveTo(150, 0);
-ctx.lineTo(150, 500);
-ctx.moveTo(225, 0);
-ctx.lineTo(225, 500);
-ctx.stroke();
-ctx.beginPath();
-// right start and stop
-ctx.moveTo(360, 0);
-ctx.lineTo(360, 500);
-ctx.moveTo(285, 0);
-ctx.lineTo(285, 500);
-ctx.stroke();
 
 canvas.addEventListener("click", (e) => {
   console.log(`${e.offsetX} ${e.offsetY}`);

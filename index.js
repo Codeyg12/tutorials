@@ -76,3 +76,5 @@ window.addEventListener("keydown", (e) => {
 });
 
 drawHead();
+
+// Adding tracking function

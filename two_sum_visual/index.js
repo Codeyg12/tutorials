@@ -1,6 +1,8 @@
 const bruteForceBtn = document.getElementById('brute-force-btn')
 const bruteForceNumber = document.querySelector('#brute-force-output > .numbers-array')
 const bruteForceText = document.querySelector('#brute-force-output > .results-text')
+const testArray = [11, 15, 2, 7]
+const testTarget = 9
 let currentNum
 let currentComplement
 

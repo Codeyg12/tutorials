@@ -2,9 +2,33 @@ const bruteForceBtn = document.getElementById('brute-force-btn')
 const bruteForceNumber = document.querySelector('#brute-force-output > .numbers-array')
 const bruteForceText = document.querySelector('#brute-force-output > .results-text')
 const testArray = [11, 15, 2, 7]
-const testTarget = 9
+const target = 9
 let currentNum
 let currentComplement
+
+const bruteForceApproach = async () => {
+    for (let i = 0; i < testArray.length; ++i) {
+        currentNum = testArray[i]
+        for (let j = i + 1; j < testArray.length; ++j) {
+            currentComplement = testArray[j]
+            await new Promise(resolve => setTimeout(resolve, 1000))
+
+            bruteForceNumber.innerHTML = testArray
+            .map((num, i) => `
+            <span ${getClassName(num)}>
+            ${testArray[i]}
+            </span>
+            `).join("")
+            bruteForceText.textContent = `Does the sum of ${currentNum} + ${currentComplement} = ${target}? NO!`
+            if (currentNum + currentComplement === target) {
+                bruteForceText.textContent = `Final indices: [${i}, ${j}]`
+                return
+            }
+        }
+    }
+}
+
+bruteForceBtn.addEventListener('click', bruteForceApproach)
 
 let twoSum = function(nums, target) {
     if (nums.length === 2) return [0, 1]

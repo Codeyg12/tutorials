@@ -18,6 +18,7 @@ const getClassName = num => {
 }
 
 const bruteForceApproach = async () => {
+    bruteForceBtn.setAttribute('disabled', '')
     for (let i = 0; i < testArray.length; ++i) {
         currentNum = testArray[i]
         for (let j = i + 1; j < testArray.length; ++j) {
@@ -33,6 +34,8 @@ const bruteForceApproach = async () => {
             bruteForceText.textContent = `Does the sum of ${currentNum} + ${currentComplement} = ${target}? NO!`
             if (currentNum + currentComplement === target) {
                 bruteForceText.textContent = `Final indices: [${i}, ${j}]`
+                bruteForceBtn.removeAttribute('disabled')
+                return
                 return
             }
         }

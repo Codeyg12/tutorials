@@ -6,6 +6,17 @@ const target = 9
 let currentNum
 let currentComplement
 
+const getClassName = num => {
+    switch (num) {
+        case currentNum:
+            return "class='current-num'"
+        case currentComplement:
+            return "class='complement-num'"
+        default:
+            return ""
+    }
+}
+
 const bruteForceApproach = async () => {
     for (let i = 0; i < testArray.length; ++i) {
         currentNum = testArray[i]
@@ -41,20 +52,7 @@ let twoSum = function(nums, target) {
     }
 };
 
-const getClassName = num => {
-    switch (num) {
-        case currentNum:
-            return "class='current-num"
-            
-            break;
-        case currentComplement:
-            return "class='complement-num'"
-            break;
-        default:
-            return ""
-            break;
-    }
-}
+
 
 twoSum([2,7,11,15], 9)
 twoSum([3, 2, 4], 6)

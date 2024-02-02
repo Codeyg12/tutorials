@@ -1,6 +1,11 @@
 const bruteForceBtn = document.getElementById('brute-force-btn')
 const bruteForceNumber = document.querySelector('#brute-force-output > .numbers-array')
 const bruteForceText = document.querySelector('#brute-force-output > .results-text')
+const optimalSolutionBtn = document.getElementById('optimal-visual-btn')
+const currentValueOutput = document.getElementById('current-value-output')
+const finalOptimalResult = document.getElementById('final-optimal-result')
+const table = document.getElementById('table-output')
+const tableBodyOutput = document.getElementById('map-table-body')
 const testArray = [11, 15, 2, 7]
 const target = 9
 let currentNum
@@ -36,13 +41,16 @@ const bruteForceApproach = async () => {
                 bruteForceText.textContent = `Final indices: [${i}, ${j}]`
                 bruteForceBtn.removeAttribute('disabled')
                 return
-                return
             }
         }
     }
 }
 
 bruteForceBtn.addEventListener('click', bruteForceApproach)
+
+const optimalApproach = async () => {
+    optimalSolutionBtn.setAttribute('disabled', '')
+}
 
 let twoSum = function(nums, target) {
     if (nums.length === 2) return [0, 1]

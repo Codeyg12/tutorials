@@ -81,6 +81,8 @@ const optimalApproach = async () => {
     }
 }
 
+optimalSolutionBtn.addEventListener('click', optimalApproach)
+
 let twoSum = function(nums, target) {
     if (nums.length === 2) return [0, 1]
 

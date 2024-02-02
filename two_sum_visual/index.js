@@ -66,6 +66,17 @@ const optimalApproach = async () => {
             <p>Is the difference(${difference}) in our map? YES, we found that pair of numbers that add up to the target.</p>`
             optimalSolutionBtn.removeAttribute('disabled')
             return
+        } else {
+            currentValueOutput.innerHTML = `
+            <p>Difference(${difference}) = target(${target}) - current number(${testArray[i]})</p>
+            <p>Is the difference(${difference}) in our map? NO.</p>
+            <p>Add the current number ${testArray[i]} to our map.</p>`
+            tableBodyOutput.innerHTML += `
+            <tr>
+            <td>${testArray[i]}</td>
+            <td>${i}</td>
+            </tr>`
+            map.set(testArray[i], i)
         }
     }
 }

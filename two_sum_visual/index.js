@@ -50,6 +50,24 @@ bruteForceBtn.addEventListener('click', bruteForceApproach)
 
 const optimalApproach = async () => {
     optimalSolutionBtn.setAttribute('disabled', '')
+    table.style.display = 'block'
+    currentValueOutput.innerHTML = ''
+    const map = new Map()
+
+    for (let i = 0; i < testArray.length; ++i) {
+        const difference = target - testArray[i]
+
+        await new Promise(resolve => setTimeout(resolve, 2000))
+
+        if (map.has(difference)) {
+            finalOptimalResult.textContent = `Final indices: [${map.get(difference)}, ${i}]`
+            currentValueOutput.innerHTML = `
+            <p>Difference(${difference}) = target(${target}) - current number(${testArray[i]})</p>
+            <p>Is the difference(${difference}) in our map? YES, we found that pair of numbers that add up to the target.</p>`
+            optimalSolutionBtn.removeAttribute('disabled')
+            return
+        }
+    }
 }
 
 let twoSum = function(nums, target) {

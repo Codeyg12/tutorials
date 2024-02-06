@@ -55,7 +55,13 @@ const bruteForceApproach = async () => {
 
 bruteForceBtn.addEventListener("click", bruteForceApproach);
 
+const restartTable = () => {
+  tableBodyOutput.innerHTML = ""
+  finalOptimalResult.textContent = ""
+}
+
 const optimalApproach = async () => {
+  restartTable();
   optimalSolutionBtn.setAttribute("disabled", "");
   table.style.display = "block";
   currentValueOutput.innerHTML = "";

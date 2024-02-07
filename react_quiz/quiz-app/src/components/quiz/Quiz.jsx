@@ -4,9 +4,10 @@ import { data } from '../../assets/data'
 
 const Quiz = () => {
 
-    let [index, setIndex] = useState(2)
+    let [index, setIndex] = useState(0)
     let [question, setQuestion] = useState(data[index])
     let [lock, setLock] = useState(false)
+    let [score, setScore] = useState(0)
 
     let Option1 = useRef(null)
     let Option2 = useRef(null)
@@ -20,6 +21,7 @@ const Quiz = () => {
             if (question.ans==answer) {
                 e.target.classList.add('correct')
                 setLock(true)
+                setScore(prev => prev + 1)
             } else {
                 e.target.classList.add('wrong')
                 setLock(true)
@@ -28,10 +30,23 @@ const Quiz = () => {
         }
     }
 
+    const next = () => {
+        if (lock == true) {
+            setIndex(++index)
+            setQuestion(data[index])
+            setLock(false)
+            optionArray.map(option => {
+                option.current.classList.remove('wrong')
+                option.current.classList.remove('add')
+                return null
+            })
+        }
+    }
+
     return (
         <>
         <div className="container">
-            <h1>Quiz App</h1>
+            <h1>Quiz App</h1> <p>{score}</p>
             <hr />
             <h2>{index+1}. {question.question}</h2>
             <ul>
@@ -40,8 +55,8 @@ const Quiz = () => {
                 <li ref={Option3} onClick={(e)=>checkAnswer(e,3)}>{question.option3}</li>
                 <li ref={Option4} onClick={(e)=>checkAnswer(e,4)}>{question.option4}</li>
             </ul>
-            <button>Next</button>
-            <div className="index">1 of 5 questions</div>
+            <button onClick={next}>Next</button>
+            <div className="index">{index + 1} of {data.length} questions</div>
         </div>
         </>
     )

@@ -53,7 +53,9 @@ const Quiz = () => {
         <div className="container">
             <h1>Quiz App</h1> <p>{score}</p>
             <hr />
-            {result?<></>:<>
+            {result?<>
+            <h2>You scored {score} out of {data.length}</h2>
+            <button>Reset</button></>:<>
             <h2>{index+1}. {question.question}</h2>
             <ul>
                 <li ref={Option1} onClick={(e)=>checkAnswer(e,1)}>{question.option1}</li>

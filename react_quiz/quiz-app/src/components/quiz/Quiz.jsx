@@ -19,13 +19,12 @@ const Quiz = () => {
 
     const checkAnswer = (e, answer) => {
         if (lock === false) {
+            setLock(true)
             if (question.ans==answer) {
                 e.target.classList.add('correct')
-                setLock(true)
                 setScore(prev => prev + 1)
             } else {
                 e.target.classList.add('wrong')
-                setLock(true)
                 optionArray[question.ans-1].current.classList.add('correct')
             }
         }
@@ -41,8 +40,7 @@ const Quiz = () => {
             setQuestion(data[index])
             setLock(false)
             optionArray.map(option => {
-                option.current.classList.remove('wrong')
-                option.current.classList.remove('correct')
+                option.current.classList.remove('wrong', 'correct')
                 return null
             })
         }
@@ -59,7 +57,7 @@ const Quiz = () => {
     return (
         <>
         <div className="container">
-            <h1>Quiz App</h1> <p>{score}</p>
+            <h1>Quiz App</h1>
             <hr />
             {result?<>
             <h2>You scored {score} out of {data.length}</h2>

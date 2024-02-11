@@ -56,3 +56,9 @@ line_width_label.pack(side='left', padx=5, pady=5)
 line_width_slider = tk.Scale(controls_frame, from_=1, to=10, orient='horizontal', command=lambda val: change_line_width(val))
 line_width_slider.set(line_width)
 line_width_slider.pack
+
+canvas.bind("<Button-1>", start_drawing)
+canvas.bind("<B1-Motion", draw)
+canvas.bind("<ButtonRelease-1>", stop_draw)
+
+root.mainloop()

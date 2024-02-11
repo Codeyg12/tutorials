@@ -3,10 +3,8 @@ from tkinter.colorchooser import askcolor
 
 def start_drawing(e):
     global is_drawing, prev_x, prev_y
-    if is_drawing:
-        current_x, current_y = e.x, e.y
-        canvas.create_line(prev_x, prev_y, current_x, current_y, fill=drawing_color, width=line_width, capstyle=tk.ROUND, smooth=True)
-        prev_x, prev_y = current_x, current_y
+    is_drawing = True
+    prev_x, prev_y = e.x, e.y
 
 def draw(e):
     global is_drawing, prev_x, prev_y
@@ -55,10 +53,10 @@ line_width_label.pack(side='left', padx=5, pady=5)
 
 line_width_slider = tk.Scale(controls_frame, from_=1, to=10, orient='horizontal', command=lambda val: change_line_width(val))
 line_width_slider.set(line_width)
-line_width_slider.pack
+line_width_slider.pack(side='left', padx=5, pady=5)
 
 canvas.bind("<Button-1>", start_drawing)
-canvas.bind("<B1-Motion", draw)
+canvas.bind("<B1-Motion>", draw)
 canvas.bind("<ButtonRelease-1>", stop_draw)
 
 root.mainloop()

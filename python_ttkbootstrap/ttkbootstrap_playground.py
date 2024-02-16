@@ -61,4 +61,12 @@ root.geometry('500x360')
 # checkbox5 = tb.Checkbutton(bootstyle="warning, square-toggle", text='Square Toggle', variable=var5, onvalue=1, offvalue=0)
 # checkbox5.pack(pady=10)
 
+# # Button Resize
+# button_style = tb.Style()
+# button_style.configure('success.Outline.TButton', font=('Helvetica', 18))
+
+# button = tb.Button(text='Hello', bootstyle='success', style='success.Outline.TButton', width=20)
+# button.pack(pady=40)
+
+
 root.mainloop()

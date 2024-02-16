@@ -32,7 +32,7 @@ root.geometry('500x360')
 #     else:
 #         checkbox_label.config(text='Unchecked')
 
-# # Checkbox Label
+# # # Checkbox Label
 # checkbox_label = Label(text='Click the checkbutton below', font=('Helvetica', 18))
 # checkbox_label.pack(pady=(40, 10))
 
@@ -40,5 +40,25 @@ root.geometry('500x360')
 # var1 = IntVar()
 # checkbox = tb.Checkbutton(bootstyle='info', text='Check Me Out', variable=var1, onvalue=1, offvalue=0, command=checker)
 # checkbox.pack(pady=10)
+
+# # Toolbutton
+# var2 = IntVar()
+# checkbox2 = tb.Checkbutton(bootstyle='info, toolbutton', text='Toolbutton', variable=var2, onvalue=1, offvalue=0, command=checker)
+# checkbox2.pack(pady=10)
+
+# # Outline Toolbutton
+# var3 = IntVar()
+# checkbox3 = tb.Checkbutton(bootstyle='info, toolbutton, outline', text='Toolbutton', variable=var3, onvalue=1, offvalue=0, command=checker)
+# checkbox3.pack(pady=10)
+
+# # Round Toggle Button
+# var4 = IntVar()
+# checkbox4 = tb.Checkbutton(bootstyle="success, round-toggle", text='Round Toggle', variable=var4, onvalue=1, offvalue=0)
+# checkbox4.pack(pady=10)
+
+# # Square Toggle Button
+# var5 = IntVar()
+# checkbox5 = tb.Checkbutton(bootstyle="warning, square-toggle", text='Square Toggle', variable=var5, onvalue=1, offvalue=0)
+# checkbox5.pack(pady=10)
 
 root.mainloop()

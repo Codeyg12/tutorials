@@ -301,4 +301,19 @@ counter = 0
 
 # scrollbar.config(command=scroll_text.yview)
 
+# # Separator 
+# sep_label1 = tb.Label(root, bootstyle="danger", text="Label 1")
+# sep_label1.pack(pady=20)
+
+# separator = tb.Separator(root, bootstyle='success', orient='horizontal')
+# separator.pack(fill='x', padx=20)
+
+# sep_label2 = tb.Label(root, bootstyle="danger", text="Label 2")
+# sep_label2.pack(pady=20)
+
+# # Sizegrip
+# sizegrip = tb.Sizegrip(root, bootstyle='info')
+# sizegrip.pack(anchor='se', fill='both', expand=True)
+
+
 root.mainloop()

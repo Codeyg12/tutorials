@@ -144,4 +144,35 @@ root.geometry('500x560')
 # date_label = tb.Label(root, text="")
 # date_label.pack(pady=10)
 
+# # Frame
+# def thing():
+#     pass
+
+# frame = tb.Frame(root, bootstyle="light")
+# frame.pack(pady=40)
+
+# frame_entry = tb.Entry(frame, font=('Helvetica', 18))
+# frame_entry.pack(pady=20, padx=20)
+
+# frame_button = tb.Button(frame, text='Click Me', bootstyle='dark', command=thing)
+# frame_button.pack(pady=20, padx=20)
+
+# farme_label = tb.Label(root, text='Hello There', font=('Helvetica', 18))
+# farme_label.pack(pady=20)
+
+# # Menu Buttons
+# def stuff(x):
+#         menu.config(bootstyle=x)
+
+# menu = tb.Menubutton(root, bootstyle="warning", text="Things")
+# menu.pack(pady=50)
+
+# inside_menu = tb.Menu(menu)
+
+# item_var = StringVar()
+# for x in ['primary', 'secondary', 'danger', 'light', 'warning', 'success', 'info', 'dark', 'primary outline', 'secondary outline', 'danger outline', 'light outline', 'warning outline', 'success outline', 'info outline', 'dark outline']:
+#     inside_menu.add_radiobutton(label=x, variable=item_var, command=lambda x=x: stuff(x))
+    
+# menu['menu'] = inside_menu
+
 root.mainloop()

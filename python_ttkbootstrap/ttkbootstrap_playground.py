@@ -279,4 +279,14 @@ counter = 0
 # radio_label = tb.Label(root, text="")
 # radio_label.pack(pady=20)
 
+# # Sliders
+# def slide_scale(e):
+#     slider_label.config(text=int(slider['value']))
+
+# slider = tb.Scale(root, bootstyle="light", length=400, orient="horizontal", from_=0, to=100, command=slide_scale)
+# slider.pack(pady=40)
+
+# slider_label = tb.Label(root, text=slider['value'])
+# slider_label.pack(pady=10)
+
 root.mainloop()

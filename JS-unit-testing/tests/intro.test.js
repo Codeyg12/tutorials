@@ -1,5 +1,5 @@
 import { describe, test, it, expect } from 'vitest'
-import { fizzBuzz, max } from '../src/intro';
+import { calculateAverage, fizzBuzz, max } from '../src/intro';
 
 describe('max', () => {
     it('should return the first arugment if it is greater', () => {
@@ -35,5 +35,20 @@ describe('fizzBuzz', () => {
     })
     it('should return a number if it doesnt meet the requirments', () => {
         expect(fizzBuzz(4)).toBe("4")
+    })
+})
+
+describe('calculateAverage', () => {
+    it('should return NaN if array is empty', () => {
+        expect(calculateAverage([])).toBe(NaN)
+    })
+    it('should return the number if the array only has one number', () => {
+        expect(calculateAverage([1])).toBe(1)
+    })
+    it('should return the average if the array has two numbers', () => {
+        expect(calculateAverage([1, 2])).toBe(1.5)
+    })
+    it('should return the average if the array has multiple numbers', () => {
+        expect(calculateAverage([1, 2, 2, 1])).toBe(1.5)
     })
 })

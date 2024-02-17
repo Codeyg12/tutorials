@@ -1,11 +1,13 @@
 from tkinter import *
 from ttkbootstrap.constants import *
 import ttkbootstrap as tb
+from datetime import date
+from ttkbootstrap.dialogs import Querybox
 
 root = tb.Window(themename='solar')
 
 root.title('TTK Bootstrap')
-root.geometry('500x360')
+root.geometry('500x560')
 
 # # Button Function
 # counter = 0
@@ -87,17 +89,59 @@ root.geometry('500x360')
 # combobox.bind('<<ComboboxSelected>>', click_bind)
 
 
-# Entry Box
-def speak():
-    entry_label.config(text=f'You typed: {entry.get()}')
+# # Entry Box
+# def speak():
+#     entry_label.config(text=f'You typed: {entry.get()}')
 
-entry = tb.Entry(root, bootstyle='success', font=('Helvetica', 18), foreground='black', width=20, show='*')
-entry.pack(pady=40)
+# entry = tb.Entry(root, bootstyle='success', font=('Helvetica', 18), foreground='black', width=20, show='*')
+# entry.pack(pady=40)
 
-entry_button = tb.Button(root, bootstyle='danger outline', text='Click Me', command=speak)
-entry_button.pack(pady=10)
+# entry_button = tb.Button(root, bootstyle='danger outline', text='Click Me', command=speak)
+# entry_button.pack(pady=10)
 
-entry_label = tb.Label(root, text="")
-entry_label.pack(pady=20)
+# entry_label = tb.Label(root, text="")
+# entry_label.pack(pady=20)
+
+# # Floodgauge
+# def starter():
+#     floodgauge.start()
+
+# def stopper():
+#     floodgauge.stop()
+
+# def incer():
+#     floodgauge.step(10)
+
+# floodgauge = tb.Floodgauge(root, bootstyle="success", font=('Helvetica', 18), mask='Pos: {}%', maximum=80, orient='horizontal', value=0)
+# floodgauge.pack(pady=50, fill=X, padx=20)
+
+# start_button = tb.Button(root, text='Start', bootstyle="danger outline", command=starter)
+# start_button.pack(pady=20)
+
+# stop_button = tb.Button(root, text='Stop', bootstyle="danger outline", command=stopper)
+# stop_button.pack(pady=20)
+
+# inc_button = tb.Button(root, text='Increment', bootstyle="danger outline", command=incer)
+# inc_button.pack(pady=20)
+
+# # Date Entry
+# def datey():
+#     date_label.config(text=f'Date Picked: {my_date.entry.get()}')
+
+# def thing():
+#     cal = Querybox()
+#     date_label.config(text=f'Date Picked: {cal.get_date()}')
+
+# my_date = tb.DateEntry(root, bootstyle='danger', firstweekday=0 , startdate=date(1993, 11, 18))
+# my_date.pack(pady=50)
+
+# date_button = tb.Button(root, text='Get Date', bootstyle="danger outline", command=datey)
+# date_button.pack(pady=20)
+
+# date_button2 = tb.Button(root, text='Get Calendar', bootstyle="light outline", command=thing)
+# date_button2.pack(pady=20)
+
+# date_label = tb.Label(root, text="")
+# date_label.pack(pady=10)
 
 root.mainloop()

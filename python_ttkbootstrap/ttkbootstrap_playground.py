@@ -3,14 +3,16 @@ from ttkbootstrap.constants import *
 import ttkbootstrap as tb
 from datetime import date
 from ttkbootstrap.dialogs import Querybox
+from PIL import Image
+Image.CUBIC = Image.BICUBIC
 
 root = tb.Window(themename='solar')
 
 root.title('TTK Bootstrap')
 root.geometry('500x560')
+counter = 0
 
 # # Button Function
-# counter = 0
 # def changer():
 #     global counter
 #     counter += 1
@@ -174,5 +176,29 @@ root.geometry('500x560')
 #     inside_menu.add_radiobutton(label=x, variable=item_var, command=lambda x=x: stuff(x))
     
 # menu['menu'] = inside_menu
+
+# # Meter
+# def clicker():
+#     global counter
+#     counter += 5
+#     my_meter.configure(amountused=counter)
+
+# def up():
+#     my_meter.step(10)
+
+# def down():
+#     my_meter.step(-10)
+
+# my_meter = tb.Meter(root, bootstyle='warning', subtext='Tkinter Learned', subtextstyle='success' , interactive=True, textright='%', metertype='full', stripethickness=10, metersize=200, padding=50, amountused=20, amounttotal=100)
+# my_meter.pack(pady=40)
+
+# meter_button = tb.Button(root, text='Click Me', bootstyle='success outline', command=clicker)
+# meter_button.pack(pady=10)
+
+# meter_up = tb.Button(root, text='Step Up', bootstyle='success outline', command=up)
+# meter_up.pack(pady=10)
+
+# meter_down = tb.Button(root, text='Step Down', bootstyle='success outline', command=down)
+# meter_down.pack(pady=10)
 
 root.mainloop()

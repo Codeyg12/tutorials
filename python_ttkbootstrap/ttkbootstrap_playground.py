@@ -68,23 +68,36 @@ root.geometry('500x360')
 # button = tb.Button(text='Hello', bootstyle='success', style='success.Outline.TButton', width=20)
 # button.pack(pady=40)
 
-# Combobox
-def click_bind(e):
-    combo_label.config(text=f"Happy {combobox.get()}!")
+# # Combobox
+# def click_bind(e):
+#     combo_label.config(text=f"Happy {combobox.get()}!")
 
-combo_label = tb.Label(root, text='Hello World', font=('Helvetica', 18))
-combo_label.pack(pady=30)
+# combo_label = tb.Label(root, text='Hello World', font=('Helvetica', 18))
+# combo_label.pack(pady=30)
 
-days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+# days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
-combobox = tb.Combobox(root, bootstyle='secondary', values=days)
-combobox.pack(pady=10)
+# combobox = tb.Combobox(root, bootstyle='secondary', values=days)
+# combobox.pack(pady=10)
 
-# Set Default Value
-combobox.current(0)
+# # Set Default Value
+# combobox.current(0)
 
-# Bind the combobox
-combobox.bind('<<ComboboxSelected>>', click_bind)
+# # Bind the combobox
+# combobox.bind('<<ComboboxSelected>>', click_bind)
 
+
+# Entry Box
+def speak():
+    entry_label.config(text=f'You typed: {entry.get()}')
+
+entry = tb.Entry(root, bootstyle='success', font=('Helvetica', 18), foreground='black', width=20, show='*')
+entry.pack(pady=40)
+
+entry_button = tb.Button(root, bootstyle='danger outline', text='Click Me', command=speak)
+entry_button.pack(pady=10)
+
+entry_label = tb.Label(root, text="")
+entry_label.pack(pady=20)
 
 root.mainloop()

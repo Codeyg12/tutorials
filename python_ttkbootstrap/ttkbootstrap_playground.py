@@ -3,6 +3,7 @@ from ttkbootstrap.constants import *
 import ttkbootstrap as tb
 from datetime import date
 from ttkbootstrap.dialogs import Querybox, Messagebox
+from ttkbootstrap.dialogs.colorchooser import ColorChooserDialog
 import time
 from PIL import Image
 Image.CUBIC = Image.BICUBIC
@@ -367,5 +368,19 @@ counter = 0
 
 # message_label = tb.Label(root, text="", font=('Helvetica', 18))
 # message_label.pack(pady=20)
+
+# # Color Chooser
+# def cc():
+#     color_chooser = ColorChooserDialog()
+#     color_chooser.show()
+#     colors = color_chooser.result
+#     cc_label.config(text=colors.hsl)
+#     root.config(background=colors.hex)
+
+# cc_button = tb.Button(root, bootstyle='danger', text='Click Me', command=cc)
+# cc_button.pack(pady=40)
+
+# cc_label = tb.Label(root, text='', font=('Helvetica', 18))
+# cc_label.pack(pady=20)
 
 root.mainloop()

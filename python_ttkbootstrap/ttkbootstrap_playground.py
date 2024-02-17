@@ -289,4 +289,16 @@ counter = 0
 # slider_label = tb.Label(root, text=slider['value'])
 # slider_label.pack(pady=10)
 
+# # Scrollbar
+# scroll_frame = tb.Frame(root)
+# scroll_frame.pack(pady=20)
+
+# scrollbar = tb.Scrollbar(scroll_frame, orient="vertical", bootstyle="warning round")
+# scrollbar.pack(side="right", fill="y")
+
+# scroll_text = Text(scroll_frame, width=30, height=25, yscrollcommand=scrollbar.set, wrap="none", font=('Helvetica', 18))
+# scroll_text.pack()
+
+# scrollbar.config(command=scroll_text.yview)
+
 root.mainloop()

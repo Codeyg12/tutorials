@@ -315,5 +315,19 @@ counter = 0
 # sizegrip = tb.Sizegrip(root, bootstyle='info')
 # sizegrip.pack(anchor='se', fill='both', expand=True)
 
+# # Spinboxes
+# def spinbox_message():
+#     spinbox_label.config(text=f'Hello {spinbox.get()}')
+
+# spinbox_list = ["Nemo", 'Tomr', 'Nick', 'C-Money']
+
+# spinbox = tb.Spinbox(root, bootstyle='primary', from_=0, to=10, values=spinbox_list, state='readonly', font=('Helvetica', 18), command=spinbox_message)
+# spinbox.pack(pady=20)
+
+# spinbox_label = tb.Label(root, text="", font=('Helvetica', 18))
+# spinbox_label.pack(pady=10)
+
+# # Set spinbox default
+# spinbox.set("Naruto")
 
 root.mainloop()

@@ -1,5 +1,5 @@
 import { describe, test, it, expect } from 'vitest'
-import { calculateAverage, fizzBuzz, max } from '../src/intro';
+import { calculateAverage, factorial, fizzBuzz, max } from '../src/intro';
 
 describe('max', () => {
     it('should return the first arugment if it is greater', () => {
@@ -50,5 +50,20 @@ describe('calculateAverage', () => {
     })
     it('should return the average if the array has multiple numbers', () => {
         expect(calculateAverage([1, 2, 2, 1])).toBe(1.5)
+    })
+})
+
+describe('factorial', () => {
+    it('should return 6 if given 3', () => {
+        expect(factorial(3)).toBe(6)
+    })
+    it('should return 1 if given 0', () => {
+        expect(factorial(0)).toBe(1)
+    })
+    it('should return 1 if given 1', () => {
+        expect(factorial(1)).toBe(1)
+    })
+    it('should return undefined if given a negative number', () => {
+        expect(factorial(-1)).toBe(undefined)
     })
 })

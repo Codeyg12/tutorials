@@ -4,6 +4,7 @@ import ttkbootstrap as tb
 from datetime import date
 from ttkbootstrap.dialogs import Querybox, Messagebox
 from ttkbootstrap.dialogs.colorchooser import ColorChooserDialog
+from ttkbootstrap.scrolled import ScrolledText
 import time
 from PIL import Image
 Image.CUBIC = Image.BICUBIC
@@ -382,5 +383,9 @@ counter = 0
 
 # cc_label = tb.Label(root, text='', font=('Helvetica', 18))
 # cc_label.pack(pady=20)
+
+# Scrolled Text
+scrolled_text = ScrolledText(root, height=20, width=110, wrap=WORD, autohide=True)
+scrolled_text.pack(pady=20)
 
 root.mainloop()

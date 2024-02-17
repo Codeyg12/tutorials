@@ -3,6 +3,7 @@ from ttkbootstrap.constants import *
 import ttkbootstrap as tb
 from datetime import date
 from ttkbootstrap.dialogs import Querybox
+import time
 from PIL import Image
 Image.CUBIC = Image.BICUBIC
 
@@ -223,5 +224,45 @@ counter = 0
 # # Adding Tabs
 # notebook.add(tab1, text='Tab 1')
 # notebook.add(tab2, text='Tab 2')
+
+# # Progress Bars
+# def progress_increment():
+#     progressbar['value'] += 20
+
+#     progressbar_label.config(text=progressbar['value'])
+
+# def progress_start():
+#     progressbar.start(10)
+
+# def progress_stop():
+#     progressbar.stop()
+
+# def progress_auto():
+#     for x in range(5):
+#         progressbar['value'] += 20
+#         progressbar_label.config(text=progressbar['value'])
+#         root.update_idletasks()
+#         time.sleep(1)
+
+# progressbar = tb.Progressbar(root, bootstyle="danger", maximum=100, mode="determinate", length=300, value=0)
+# progressbar.pack(pady=40)
+
+# progressbar_frame = tb.Frame(root)
+# progressbar_frame.pack(pady=20)
+
+# start_progress = tb.Button(progressbar_frame, bootstyle="info", text='Start', command=progress_start)
+# start_progress.grid(column=0, row=0, padx=10)
+
+# stop_progress = tb.Button(progressbar_frame, bootstyle="danger", text='Stop', command=progress_stop)
+# stop_progress.grid(column=1, row=0, padx=10)
+
+# auto_progress = tb.Button(progressbar_frame, bootstyle="info", text='Auto', command=progress_auto)
+# auto_progress.grid(column=2, row=0, padx=10)
+
+# progressbar_button = tb.Button(progressbar_frame, bootstyle="info", text='Increment 20', command=progress_increment)
+# progressbar_button.grid(column=3, row=0, padx=10)
+
+# progressbar_label = tb.Label(root, text="", font=('Helvetica', 18))
+# progressbar_label.pack(pady=10)
 
 root.mainloop()

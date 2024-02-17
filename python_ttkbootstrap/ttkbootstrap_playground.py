@@ -10,7 +10,7 @@ Image.CUBIC = Image.BICUBIC
 root = tb.Window(themename='solar')
 
 root.title('TTK Bootstrap')
-root.geometry('500x560')
+root.geometry('1000x1000')
 counter = 0
 
 # # Button Function
@@ -329,5 +329,23 @@ counter = 0
 
 # # Set spinbox default
 # spinbox.set("Naruto")
+
+# # Treeview
+# tree_columns = ("first_name", "last_name", "email")
+
+# tree = tb.Treeview(root, bootstyle="dark", columns=tree_columns, show="headings")
+# tree.pack(pady=20)
+
+# tree.heading('first_name', text='First Name')
+# tree.heading('last_name', text='Last Name')
+# tree.heading('email', text='Email Address')
+
+# contacts = []
+
+# for n in range(1, 20):
+#     contacts.append((f'First {n}', f'Last {n}', f'email{n}@address.com'))
+
+# for contact in contacts:
+#     tree.insert('', END, values=contact)
 
 root.mainloop()

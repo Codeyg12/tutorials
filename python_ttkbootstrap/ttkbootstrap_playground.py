@@ -201,4 +201,27 @@ counter = 0
 # meter_down = tb.Button(root, text='Step Down', bootstyle='success outline', command=down)
 # meter_down.pack(pady=10)
 
+# # Notebook Tabs
+# notebook = tb.Notebook(root, bootstyle='dark')
+# notebook.pack(pady=40)
+
+# tab1 = tb.Frame(notebook)
+# tab2 = tb.Frame(notebook)
+
+# notebook_label1 = Label(tab1, text='Awesome', font=('Helvetica', 18))
+# notebook_label1.pack(pady=20)
+
+# notebook_text = Text(tab1, width=70, height=10)
+# notebook_text.pack(pady=10, padx=10)
+
+# notebook_button = tb.Button(tab1, text='Click Me', bootstyle=" danger outline")
+# notebook_button.pack(pady=20)
+
+# notebook_label2 = Label(tab2, text='Second Tab WOW', font=('Helvetica', 18))
+# notebook_label2.pack(pady=10)
+
+# # Adding Tabs
+# notebook.add(tab1, text='Tab 1')
+# notebook.add(tab2, text='Tab 2')
+
 root.mainloop()

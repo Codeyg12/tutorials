@@ -265,4 +265,18 @@ counter = 0
 # progressbar_label = tb.Label(root, text="", font=('Helvetica', 18))
 # progressbar_label.pack(pady=10)
 
+# # Radio Buttons
+# def radio_clicker():
+#     radio_label.config(text=f'You Picked: {my_topping.get()}')
+
+# toppings = ['Pepperoni', 'Cheese', 'Veggie']
+
+# my_topping = StringVar()
+
+# for topping in toppings:
+#     tb.Radiobutton(root, bootstyle='danger', variable=my_topping, text=topping, value=topping, command=radio_clicker).pack(pady=20)
+
+# radio_label = tb.Label(root, text="")
+# radio_label.pack(pady=20)
+
 root.mainloop()

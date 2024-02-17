@@ -2,7 +2,7 @@ from tkinter import *
 from ttkbootstrap.constants import *
 import ttkbootstrap as tb
 from datetime import date
-from ttkbootstrap.dialogs import Querybox
+from ttkbootstrap.dialogs import Querybox, Messagebox
 import time
 from PIL import Image
 Image.CUBIC = Image.BICUBIC
@@ -347,5 +347,25 @@ counter = 0
 
 # for contact in contacts:
 #     tree.insert('', END, values=contact)
+
+# # Message Boxes
+# def message_click():
+#     mb = Messagebox.yesno('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.ok('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.yesnocancel('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.okcancel('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.show_info('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.show_error('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.show_question('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.show_warning('Display Some Message Here', 'The Title is Here')
+#     # mb = Messagebox.retrycancel('Display Some Message Here', 'The Title is Here')
+
+#     message_label.config(text=f'You clicked {mb}')
+
+# message_button = tb.Button(root, bootstyle="danger", text='Click Me', command=message_click)
+# message_button.pack(pady=20)
+
+# message_label = tb.Label(root, text="", font=('Helvetica', 18))
+# message_label.pack(pady=20)
 
 root.mainloop()

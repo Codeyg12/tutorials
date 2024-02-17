@@ -5,14 +5,16 @@ from datetime import date
 from ttkbootstrap.dialogs import Querybox, Messagebox
 from ttkbootstrap.dialogs.colorchooser import ColorChooserDialog
 from ttkbootstrap.scrolled import ScrolledText, ScrolledFrame
+from ttkbootstrap.toast import ToastNotification
 import time
 from PIL import Image
+
 Image.CUBIC = Image.BICUBIC
 
-root = tb.Window(themename='solar')
+root = tb.Window(themename="solar")
 
-root.title('TTK Bootstrap')
-root.geometry('1000x1000')
+root.title("TTK Bootstrap")
+root.geometry("1000x1000")
 counter = 0
 
 # # Button Function
@@ -34,7 +36,7 @@ counter = 0
 
 # # Checkbox Function
 # def checker():
-#     if var1.get() == 1: 
+#     if var1.get() == 1:
 #         checkbox_label.config(text='Checked')
 #     else:
 #         checkbox_label.config(text='Unchecked')
@@ -177,7 +179,7 @@ counter = 0
 # item_var = StringVar()
 # for x in ['primary', 'secondary', 'danger', 'light', 'warning', 'success', 'info', 'dark', 'primary outline', 'secondary outline', 'danger outline', 'light outline', 'warning outline', 'success outline', 'info outline', 'dark outline']:
 #     inside_menu.add_radiobutton(label=x, variable=item_var, command=lambda x=x: stuff(x))
-    
+
 # menu['menu'] = inside_menu
 
 # # Meter
@@ -303,7 +305,7 @@ counter = 0
 
 # scrollbar.config(command=scroll_text.yview)
 
-# # Separator 
+# # Separator
 # sep_label1 = tb.Label(root, bootstyle="danger", text="Label 1")
 # sep_label1.pack(pady=20)
 
@@ -394,5 +396,14 @@ counter = 0
 
 # for x in range(11):
 #     tb.Button(scrolled_frame, bootstyle='light', text=f'Click Me {x}').pack(pady=10)
+
+# # Toast Messages
+# def toast_click():
+#     toast.show_toast()
+
+# toast = ToastNotification(title='My Toast Title', message='TOAST MESSAGE', duration=3000, alert=True, position=(30, 30, 'sw'))
+
+# toast_button = tb.Button(root, text='Click Me', command=toast_click)
+# toast_button.pack(pady=20)
 
 root.mainloop()

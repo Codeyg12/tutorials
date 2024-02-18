@@ -1,4 +1,6 @@
 const board = document.getElementById('game-board')
+const instructionText = document.getElementById('instruction-text')
+const logo = document.getElementById('logo')
 
 let gridSize = 20
 let snake = [{x: 10, y:10}]
@@ -69,7 +71,8 @@ function move() {
     
     if (head.x === food.x && head.y === food.y) {
         food = generateFood()
-        clearInterval()
+        increaseSpeed()
+        clearInterval(gameInterval)
         gameInterval = setInterval(() => {
             move()
             draw()
@@ -81,6 +84,52 @@ function move() {
 
 function startGame() {
     gameStarted = true
+    instructionText.style.display = 'none'
+    logo.style.display = 'none'
+    gameInterval = setInterval(() => {
+        move()
+        checkCollision()
+        draw()
+    }, gameSpeedDelay)
 }
 
-draw()
+function handleKeyPress(e) {
+    if ((!gameStarted && e.code === 'Space') || (!gameStarted && e.key === ' ')) {
+        startGame()
+    } else {
+        switch (e.key) {
+            case 'ArrowUp':
+                direction = 'up'
+                break;
+            case 'ArrowDown':
+                direction = 'down'
+                break;
+            case 'ArrowLeft':
+                direction = 'left'
+                break;
+            case 'ArrowRight':
+                direction = 'right'
+                break;
+        }
+    }
+}
+
+document.addEventListener('keydown', handleKeyPress)
+
+function increaseSpeed() {
+    if (gameSpeedDelay > 150) {
+        gameSpeedDelay -= 5
+    } else if (gameSpeedDelay > 100) {
+        gameSpeedDelay -= 3
+    } else if (gameSpeedDelay > 50) {
+        gameSpeedDelay -= 2
+    } else if (gameSpeedDelay > 25) {
+        gameSpeedDelay -= 1
+    }
+}
+
+function checkCollision() {
+
+}
+
+// draw()

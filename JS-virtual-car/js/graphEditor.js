@@ -15,7 +15,7 @@ class GraphEditor {
         this.canvas.addEventListener('mousedown', (e) => {
             if (e.button == 2) { // right click
                 if (this.hovered) {
-                    this.graph.removePoint(this.hovered)
+                    this.#removePoint(this.hovered)
                 }
             }
             if (e.button == 0) { // left click
@@ -28,6 +28,7 @@ class GraphEditor {
                 }
                 this.graph.addPoint(mouse)
                 this.selected = mouse
+                this.hovered = mouse
             }
         })
         this.canvas.addEventListener('mousemove', (e) => {
@@ -35,6 +36,14 @@ class GraphEditor {
             this.hovered = getNearestPoint(mouse, this.graph.points, 10)
         })
         this.canvas.addEventListener('contextmenu', e => e.preventDefault())
+    }
+
+    #removePoint(point) {
+        this.graph.removePoint(point)
+        this.hovered = null
+        if (this.selected == point) {
+            this.selected = null
+        }
     }
 
     display() {

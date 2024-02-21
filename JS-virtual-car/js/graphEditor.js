@@ -14,12 +14,27 @@ class GraphEditor {
   }
 
   #addEventListeners() {
-    this.canvas.addEventListener("mousedown", (e) => {
-      if (e.button == 2) { // right click
-        if (this.hovered) {
-          this.#removePoint(this.hovered);
-        } else {
+    this.canvas.addEventListener("mousedown", this.#handleMouseDown.bind(this));
+    this.canvas.addEventListener("mousemove", this.#handleMouseUp.bind(this));
+    this.canvas.addEventListener("contextmenu", (e) => e.preventDefault());
+    this.canvas.addEventListener("mouseup", () => this.dragging = false);
+  }
+
+  #handleMouseUp(e) {
+    this.mouse = new Point(e.offsetX, e.offsetY);
+    this.hovered = getNearestPoint(this.mouse, this.graph.points, 10);
+    if (this.dragging == true) {
+      this.selected.x = this.mouse.x
+      this.selected.y = this.mouse .y
+    }
+  }
+
+  #handleMouseDown(e) {
+    if (e.button == 2) { // right click
+        if (this.selected) {
             this.selected = null
+        } else if (this.hovered) {
+            this.#removePoint(this.hovered)
         }
       }
       if (e.button == 0) {  // left click
@@ -32,17 +47,6 @@ class GraphEditor {
         this.#select(this.mouse)
         this.hovered = this.mouse;
       }
-    });
-    this.canvas.addEventListener("mousemove", (e) => {
-      this.mouse = new Point(e.offsetX, e.offsetY);
-      this.hovered = getNearestPoint(this.mouse, this.graph.points, 10);
-      if (this.dragging == true) {
-        this.selected.x = this.mouse.x
-        this.selected.y = this.mouse .y
-      }
-    });
-    this.canvas.addEventListener("contextmenu", (e) => e.preventDefault());
-    this.canvas.addEventListener("mouseup", () => this.dragging = false);
   }
 
   #select(point) {

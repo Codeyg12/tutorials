@@ -16,13 +16,13 @@ class GraphEditor {
 
   #addEventListeners() {
     this.canvas.addEventListener("mousedown", this.#handleMouseDown.bind(this));
-    this.canvas.addEventListener("mousemove", this.#handleMouseUp.bind(this));
+    this.canvas.addEventListener("mousemove", this.#handleMouseMove.bind(this));
     this.canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     this.canvas.addEventListener("mouseup", () => this.dragging = false);
   }
 
-  #handleMouseUp(e) {
-    this.mouse = this.viewport.getMouse(e)
+  #handleMouseMove(e) {
+    this.mouse = this.viewport.getMouse(e, true)
     this.hovered = getNearestPoint(this.mouse, this.graph.points, 10 * this.viewport.zoom);
     if (this.dragging == true) {
       this.selected.x = this.mouse.x
@@ -63,6 +63,12 @@ class GraphEditor {
     if (this.selected == point) {
       this.selected = null;
     }
+  }
+
+  dispose() {
+    this.graph.dispose()
+    this.selected = null
+    this.hovered = null
   }
 
   display() {

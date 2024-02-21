@@ -17,11 +17,22 @@ class Viewport {
     this.#addEventListeners();
   }
 
-  getMouse(e) {
-    return new Point(
+  reset() {
+    this.ctx.restore();
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.save();
+    this.ctx.translate(this.center.x, this.center.y);
+    this.ctx.scale(1 / this.zoom, 1 / this.zoom);
+    const offset = this.getOffset();
+    this.ctx.translate(offset.x, offset.y);
+  }
+
+  getMouse(e, subtractDragOffset = false) {
+    const p = new Point(
       (e.offsetX - this.center.x) * this.zoom - this.offset.x,
       (e.offsetY - this.center.y) * this.zoom - this.offset.y
     );
+    return subtractDragOffset ? subtract(p, this.drag.offset) : p
   }
 
   getOffset() {
@@ -40,7 +51,6 @@ class Viewport {
 
   #handleMouseDown(e) {
     if (e.button == 1) {
-      console.log("true");
       this.drag.start = this.getMouse(e);
       this.drag.active = true;
     }

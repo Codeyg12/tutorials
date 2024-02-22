@@ -26,7 +26,7 @@ class GraphEditor {
     this.boundMouseDown = this.#handleMouseDown.bind(this);
     this.boundMouseMove = this.#handleMouseMove.bind(this);
     this.boundMouseUp = () => (this.dragging = false);
-    this.boundContextMenu = (e) => e.preventDefault();
+    this.boundContextMenu = (evt) => evt.preventDefault();
     this.canvas.addEventListener("mousedown", this.boundMouseDown);
     this.canvas.addEventListener("mousemove", this.boundMouseMove);
     this.canvas.addEventListener("mouseup", this.boundMouseUp);
@@ -40,8 +40,8 @@ class GraphEditor {
     this.canvas.removeEventListener("contextmenu", this.boundContextMenu);
   }
 
-  #handleMouseMove(e) {
-    this.mouse = this.viewport.getMouse(e, true);
+  #handleMouseMove(evt) {
+    this.mouse = this.viewport.getMouse(evt, true);
     this.hovered = getNearestPoint(
       this.mouse,
       this.graph.points,
@@ -53,8 +53,8 @@ class GraphEditor {
     }
   }
 
-  #handleMouseDown(e) {
-    if (e.button == 2) {
+  #handleMouseDown(evt) {
+    if (evt.button == 2) {
       // right click
       if (this.selected) {
         this.selected = null;
@@ -62,7 +62,7 @@ class GraphEditor {
         this.#removePoint(this.hovered);
       }
     }
-    if (e.button == 0) {
+    if (evt.button == 0) {
       // left click
       if (this.hovered) {
         this.#select(this.hovered);
@@ -103,7 +103,7 @@ class GraphEditor {
     }
     if (this.selected) {
       const intent = this.hovered ? this.hovered : this.mouse;
-      new Segment(this.selected, this.mouse).draw(ctx, { dash: [3, 3] });
+      new Segment(this.selected, intent).draw(ctx, { dash: [3, 3] });
       this.selected.draw(this.ctx, { outline: true });
     }
   }

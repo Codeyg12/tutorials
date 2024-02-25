@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export async function connect() {
   try {
-    mongoose.connect(process.env.MONGO_URL!);
+    mongoose.connect(process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/nextjsAppwrite');
     const connection = mongoose.connection;
 
     connection.on("connected", () => {

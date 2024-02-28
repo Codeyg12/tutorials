@@ -4,6 +4,7 @@ import {
   Skeleton,
   SkeletonCircle,
   VStack,
+  Box,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import FeedPost from "./FeedPost";

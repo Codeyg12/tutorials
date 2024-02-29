@@ -7,8 +7,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import useUserProfileStore from "../../store/userProfileStore";
+import useAuthStore from "../../store/authStore";
 
 const ProfileHeader = () => {
+  const { userProfile } = useUserProfileStore();
+  const authUser = useAuthStore((state) => state.user);
+  const visitingOwnProfileAndAuth =
+    authUser && authUser.username === userProfile.username;
+  const visitingAnotherProfileAndAuth =
+    authUser && authUser.username !== userProfile.username;
+
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -23,7 +32,7 @@ const ProfileHeader = () => {
       >
         <Avatar
           name="As a Programmer"
-          src="/profilepic.png"
+          src={userProfile.profilePicURL}
           alt="As a programmer logo"
         />
       </AvatarGroup>
@@ -36,36 +45,52 @@ const ProfileHeader = () => {
           alignItems={"center"}
           w={"full"}
         >
-          <Text fontSize={{ base: "sm", md: "lg" }}>asaprogrammer</Text>
+          <Text fontSize={{ base: "sm", md: "lg" }}>
+            {userProfile.username}
+          </Text>
 
-          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-            <Button
-              bg={"white"}
-              color={"black"}
-              _hover={{ bg: "whiteAlpha.800" }}
-              size={{ base: "xs", md: "sm" }}
-            >
-              Edit Profile
-            </Button>
-          </Flex>
+          {visitingOwnProfileAndAuth && (
+            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+              <Button
+                bg={"bg.500"}
+                color={"black"}
+                _hover={{ bg: "whiteAlpha.800" }}
+                size={{ base: "xs", md: "sm" }}
+              >
+                Edit Profile
+              </Button>
+            </Flex>
+          )}
+          {visitingAnotherProfileAndAuth && (
+            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+              <Button
+                bg={"blue"}
+                color={"white"}
+                _hover={{ bg: "blue.600" }}
+                size={{ base: "xs", md: "sm" }}
+              >
+                Follow
+              </Button>
+            </Flex>
+          )}
         </Flex>
 
         <Flex alignItems={"center"} gap={{ base: 2, sm: 4 }}>
           <Text fontSize={{ base: "xs", md: "sm" }}>
             <Text as={"span"} fontWeight={"bold"} mr={1}>
-              4
+              {userProfile.posts.length}
             </Text>
             Posts
           </Text>
           <Text fontSize={{ base: "xs", md: "sm" }}>
             <Text as={"span"} fontWeight={"bold"} mr={1}>
-              65,020
+              {userProfile.followers.length}
             </Text>
             Followers
           </Text>
           <Text fontSize={{ base: "xs", md: "sm" }}>
             <Text as={"span"} fontWeight={"bold"} mr={1}>
-              1
+              {userProfile.following.length}
             </Text>
             Following
           </Text>
@@ -73,12 +98,10 @@ const ProfileHeader = () => {
 
         <Flex align={"center"} gap={4}>
           <Text fontSize={"sm"} fontWeight={"bold"}>
-            As a Programmer
+            {userProfile.fullName}
           </Text>
         </Flex>
-        <Text fontSize={"sm"}>
-          Tutorials that are meant to level up your skills as a programmer
-        </Text>
+        <Text fontSize={"sm"}>{userProfile.bio}</Text>
       </VStack>
     </Flex>
   );

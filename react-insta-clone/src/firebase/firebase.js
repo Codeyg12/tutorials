@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "",
+  apiKey: "", //! DELETE B4 SAVING
   authDomain: "insta-clone-21c28.firebaseapp.com",
   projectId: "insta-clone-21c28",
   storageBucket: "insta-clone-21c28.appspot.com",

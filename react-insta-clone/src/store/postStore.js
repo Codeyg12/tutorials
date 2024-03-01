@@ -6,6 +6,7 @@ const usePostStore = create((set) => ({
   // delete post
   // add comment
   //set posts
+  setPosts: (posts) => set({ posts }),
 }));
 
 export default usePostStore;

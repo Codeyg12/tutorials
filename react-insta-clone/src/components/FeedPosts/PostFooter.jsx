@@ -7,7 +7,7 @@ import {
   InputRightElement,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   NotificationsLogo,
   UnlikeLogo,
@@ -22,6 +22,7 @@ const PostFooter = ({ post, username, isProfilePage }) => {
   const { isCommenting, handlePostComment } = usePostComment();
   const [comment, setComment] = useState("");
   const authUser = useAuthStore((state) => state.user);
+  const commentRef = useRef(null);
 
   const handleSubmitComment = async () => {
     await handlePostComment(post.id, comment);
@@ -45,7 +46,11 @@ const PostFooter = ({ post, username, isProfilePage }) => {
           {!liked ? <NotificationsLogo /> : <UnlikeLogo />}
         </Box>
 
-        <Box cursor={"pointer"} fontSize={18}>
+        <Box
+          cursor={"pointer"}
+          fontSize={18}
+          onClick={() => commentRef.current.focus()}
+        >
           <CommentLogo />
         </Box>
       </Flex>
@@ -81,6 +86,7 @@ const PostFooter = ({ post, username, isProfilePage }) => {
               fontSize={14}
               onChange={(e) => setComment(e.target.value)}
               value={comment}
+              ref={commentRef}
             />
             <InputRightElement>
               <Button

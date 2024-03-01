@@ -79,7 +79,13 @@ const ProfileHeaderSkeleton = () => {
 
 const UserNotFound = () => {
   return (
-    <Flex flexDir="column" textAlign={"center"} mx={"auto"}>
+    <Flex
+      flexDir="column"
+      textAlign={"center"}
+      justifyContent={"center"}
+      mx={"auto"}
+      h={"100vh"}
+    >
       <Text fontSize={"2xl"}>User Not Found</Text>
       <Link
         as={RouterLink}

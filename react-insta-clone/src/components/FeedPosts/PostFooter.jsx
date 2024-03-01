@@ -14,6 +14,7 @@ import {
   CommentLogo,
 } from "../../assets/constants";
 import usePostComment from "../../hooks/usePostComment";
+import useAuthStore from "../../store/authStore";
 
 const PostFooter = ({ post, username, isProfilePage }) => {
   const [liked, setLiked] = useState(false);

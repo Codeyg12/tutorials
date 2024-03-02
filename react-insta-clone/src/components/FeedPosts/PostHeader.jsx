@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 import useFollowUser from "../../hooks/useFollowUser";
+import { timeAgo } from "../../utils/timeAgo";
 
 const PostHeader = ({ post, creatorProfile }) => {
   const { handleFollowUser, isFollowing, isLoading } = useFollowUser(
@@ -41,7 +42,7 @@ const PostHeader = ({ post, creatorProfile }) => {
               <Link to={`/${creatorProfile.username}`}>
                 {creatorProfile.username}
               </Link>
-              <Box color={"gray.500"}>• 1w</Box>
+              <Box color={"gray.500"}>• {timeAgo(post.createdAt)}</Box>
             </>
           ) : (
             <Skeleton height={"10px"} w={"100px"} />

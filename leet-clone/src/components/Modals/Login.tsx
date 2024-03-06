@@ -13,7 +13,7 @@ const Login: React.FC<LoginProps> = () => {
             htmlFor="email"
             className="text-sm font-medium block mb-2 text-gray-300"
           >
-            Your email
+            Your Email
           </label>
           <input
             type="email"
@@ -29,7 +29,7 @@ const Login: React.FC<LoginProps> = () => {
             htmlFor="password"
             className="text-sm font-medium block mb-2 text-gray-300"
           >
-            Your password
+            Your Password
           </label>
           <input
             type="password"

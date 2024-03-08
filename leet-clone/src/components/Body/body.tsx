@@ -1,5 +1,7 @@
 "use client";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { RecoilRoot } from "recoil";
 
 type BodyProps = {
@@ -12,6 +14,7 @@ const Body: React.FC<BodyProps> = ({ children }) => {
     <>
       <RecoilRoot>
         <body>{children}</body>
+        <ToastContainer />
       </RecoilRoot>
     </>
   );

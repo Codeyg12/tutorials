@@ -13,8 +13,10 @@ const Body: React.FC<BodyProps> = ({ children }) => {
   return (
     <>
       <RecoilRoot>
-        <body>{children}</body>
-        <ToastContainer />
+        <body>
+          {children}
+          <ToastContainer />
+        </body>
       </RecoilRoot>
     </>
   );

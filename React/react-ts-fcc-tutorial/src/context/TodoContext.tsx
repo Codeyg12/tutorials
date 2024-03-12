@@ -13,7 +13,7 @@ export const TodoContext = createContext<TodoContextProps | undefined>(
 export const TodoProvider = (props: { children: React.ReactNode }) => {
   const [todos, setTodos] = useState<string[]>([])
 
-  // ::: ADD NEW TODO :: 
+  // ::: ADD NEW TODO ::
   const addTodo = (text: string) => {
     setTodos([...todos, text])
   }

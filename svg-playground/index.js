@@ -8,4 +8,3 @@ window.addEventListener("DOMContentLoaded", () => {
   hoursElement.setAttribute("transform", `rotate(${(360 / 12) * hour})`);
   minutesElement.setAttribute("transform", `rotate(${(360 / 60) * minute})`);
 });
-

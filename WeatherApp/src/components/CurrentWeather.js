@@ -1,12 +1,13 @@
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import {Feather} from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 
 const CurrentWeather = () => {
   return (
     <SafeAreaProvider style={styles.wrapper}>
+      <StatusBar barStyle="light-content" />
       <View style={styles.container}>
-        <Feather name="sun" size={24} color='black' />
+        <Feather name="sun" size={24} color="black" />
         <Text style={styles.temp}>6</Text>
         <Text style={styles.feels}>Feels like 5</Text>
         <View style={styles.highLowWrapper}>

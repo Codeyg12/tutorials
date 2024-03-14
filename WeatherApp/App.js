@@ -5,7 +5,7 @@ import UpcomingWeather from './src/components/UpcomingWeather'
 export default function App() {
   return (
     <View style={styles.container}>
-      <CurrentWeather />
+      {/* <CurrentWeather /> */}
       <UpcomingWeather />
     </View>
   )

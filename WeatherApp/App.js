@@ -1,10 +1,11 @@
-import { StyleSheet, View } from 'react-native'
+import { StatusBar, StyleSheet, View } from 'react-native'
 import CurrentWeather from './src/components/CurrentWeather'
 import UpcomingWeather from './src/components/UpcomingWeather'
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={'light-content'} />
       {/* <CurrentWeather /> */}
       <UpcomingWeather />
     </View>

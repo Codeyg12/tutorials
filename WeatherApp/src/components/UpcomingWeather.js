@@ -1,5 +1,13 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native'
+import {
+  FlatList,
+  Image,
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
 const DATA = [
@@ -65,12 +73,17 @@ const UpcomingWeather = () => {
 
   return (
     <SafeAreaProvider style={styles.container}>
-      <Text>Upcoming Weather</Text>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.dt_text}
-      />
+      <ImageBackground
+        source={require('../../assets/upcoming-background.jpg')}
+        style={styles.image}
+      >
+        <Text>Upcoming Weather</Text>
+        <FlatList
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.dt_text}
+        />
+      </ImageBackground>
     </SafeAreaProvider>
   )
 }
@@ -78,7 +91,7 @@ const UpcomingWeather = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red'
+    backgroundColor: 'royalblue'
   },
   item: {
     padding: 20,
@@ -97,6 +110,9 @@ const styles = StyleSheet.create({
   date: {
     color: 'white',
     fontSize: 15
+  },
+  image: {
+    flex: 1
   }
 })
 export default UpcomingWeather

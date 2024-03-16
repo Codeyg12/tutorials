@@ -1,6 +1,6 @@
 import { StatusBar, StyleSheet, View } from 'react-native'
-import CurrentWeather from './src/components/CurrentWeather'
-import UpcomingWeather from './src/components/UpcomingWeather'
+import UpcomingWeather from './src/screens/UpcomingWeather'
+import CurrentWeather from './src/screens/CurrentWeather'
 
 export default function App() {
   return (

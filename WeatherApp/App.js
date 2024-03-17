@@ -1,10 +1,25 @@
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import Tabs from './src/components/Tabs'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import * as Location from 'expo-location'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
+  const [location, setLocation] = useState(null)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync()
+      if (status !== 'granted') {
+        setError('Permission to access location was denied')
+        return
+      }
+      let location = await Location.getCurrentPositionAsync({})
+      setLocation(location)
+    })()
+  }, [])
 
   if (loading) {
     return (

@@ -37,11 +37,11 @@ const CurrentWeather = ({ weatherData }) => {
           size={100}
           color="white"
         />
-        <Text style={tempStyle}>{temp}</Text>
-        <Text style={feels}>{`Feels like ${feels_like}`}</Text>
+        <Text style={tempStyle}>{`${Math.round(temp)}°`}</Text>
+        <Text style={feels}>{`Feels like ${Math.round(feels_like)}°`}</Text>
         <RowText
-          messageOne={`High: ${temp_max}`}
-          messageTwo={`Low: ${temp_min}`}
+          messageOne={`High: ${Math.round(temp_max)}° `}
+          messageTwo={`Low: ${Math.round(temp_min)}°`}
           messageOneStyle={highLow}
           messageTwoStyle={highLow}
           containerStyle={highLowWrapper}

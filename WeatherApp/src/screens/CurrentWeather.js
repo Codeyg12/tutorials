@@ -22,18 +22,18 @@ const CurrentWeather = ({ weatherData }) => {
     weather
   } = weatherData
 
-  const weatherCondition = weather[0].main
+  const weatherCondition = weather[0]?.main
 
   return (
     <SafeAreaProvider
       style={[
         wrapper,
-        { backgroundColor: weatherType[weatherCondition].backgroundColor }
+        { backgroundColor: weatherType[weatherCondition]?.backgroundColor }
       ]}
     >
       <View style={container}>
         <Feather
-          name={weatherType[weatherCondition].icon}
+          name={weatherType[weatherCondition]?.icon}
           size={100}
           color="white"
         />
@@ -48,11 +48,11 @@ const CurrentWeather = ({ weatherData }) => {
         />
       </View>
       <RowText
-        messageOne={weather[0].description}
-        messageTwo={weatherType[weatherCondition].message}
+        messageOne={weather[0]?.description}
+        messageTwo={weatherType[weatherCondition]?.message}
+        containerStyle={bodyWrapper}
         messageOneStyle={description}
         messageTwoStyle={message}
-        containerStyle={bodyWrapper}
       />
     </SafeAreaProvider>
   )
@@ -63,28 +63,28 @@ const CurrentWeather = ({ weatherData }) => {
 //* Sometimes you have to add and then remove a <StatusBar> component to get the safe area to work properly.
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
   },
-  wrapper: {
-    backgroundColor: 'pink',
-    flex: 1
-  },
-  tempStyle: {
+  temperature: {
+    color: 'black',
     fontSize: 48
   },
   feels: {
-    fontSize: 30
+    fontSize: 30,
+    color: 'black'
   },
-  highLow: {
-    fontSize: 24
+  hiLow: {
+    color: 'black',
+    fontSize: 20
   },
-  highLowWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '50%'
+  hiLowWrapper: {
+    flexDirection: 'row'
   },
   bodyWrapper: {
     justifyContent: 'flex-end',
@@ -93,10 +93,10 @@ const styles = StyleSheet.create({
     marginBottom: 40
   },
   description: {
-    fontSize: 48
+    fontSize: 43
   },
   message: {
-    fontSize: 30
+    fontSize: 25
   }
 })
 

@@ -7,7 +7,7 @@ import ErrorItem from './src/components/ErrorItem'
 export default function App() {
   const [loading, error, weather] = useGetWeather()
 
-  if (weather && weather.list) {
+  if (weather && weather.list && !loading) {
     return (
       <NavigationContainer>
         <StatusBar barStyle={'light-content'} />
@@ -18,10 +18,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator size="large" color={'blue'} />
-      ) : (
+      {error ? (
         <ErrorItem />
+      ) : (
+        <ActivityIndicator size="large" color={'blue'} />
       )}
     </View>
   )

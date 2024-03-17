@@ -11,9 +11,9 @@ export default function App() {
   const [loading, setLoading] = useState(true)
   const [location, setLocation] = useState(null)
   const [error, setError] = useState(null)
-  
+
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       let { status } = await Location.requestForegroundPermissionsAsync()
       if (status !== 'granted') {
         setError('Permission to access location was denied')

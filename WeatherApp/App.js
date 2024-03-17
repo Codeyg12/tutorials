@@ -3,14 +3,30 @@ import { NavigationContainer } from '@react-navigation/native'
 import Tabs from './src/components/Tabs'
 import { useEffect, useState } from 'react'
 import * as Location from 'expo-location'
-import { TEST_KEY } from '@env'
+import { WEATHER_API_KEY } from '@env'
 
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 export default function App() {
   const [loading, setLoading] = useState(true)
-  const [location, setLocation] = useState(null)
   const [error, setError] = useState(null)
+  const [weather, setWeather] = useState([])
+  const [lat, setLat] = useState([])
+  const [lon, setLon] = useState([])
+
+  const fetchWeatherData = async () => {
+    try {
+      const res = await fetch(
+        `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}`
+      )
+      const data = await res.json()
+      setWeather(data)
+    } catch (err) {
+      setError('Could not fetch weather')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     ;(async () => {
@@ -20,9 +36,11 @@ export default function App() {
         return
       }
       let location = await Location.getCurrentPositionAsync({})
-      setLocation(location)
+      setLon(location.coords.longitude)
+      setLat(location.coords.latitude)
+      await fetchWeatherData()
     })()
-  }, [])
+  }, [lat, lon])
 
   if (loading) {
     return (

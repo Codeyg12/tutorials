@@ -11,6 +11,7 @@ import ThemeSwitch from "./components/theme-switch/ThemeSwitch";
 import ScrollIndicator from "./components/scroll-indicator/ScrollIndicator";
 import TabTest from "./components/tabs/TabTest";
 import ModalTest from "./components/modal/ModalTest";
+import GithubFinder from "./components/github-finder/GithubFinder";
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
       {/* <ThemeSwitch /> */}
       {/* <ScrollIndicator url={'https://dummyjson.com/products?limit=100'} /> */}
       {/* <TabTest /> */}
-      <ModalTest />
+      {/* <ModalTest /> */}
+      <GithubFinder />
     </div>
   );
 }

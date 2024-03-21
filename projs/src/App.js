@@ -7,6 +7,7 @@ import LoadMore from './components/load-more/LoadMore';
 import TreeView from './components/tree-view/TreeView';
 import menus from './components/tree-view/data';
 import QrGenerator from './components/qr-generator/QrGenerator';
+import ThemeSwitch from './components/theme-switch/ThemeSwitch';
 
 function App() {
   return ( 
@@ -17,7 +18,8 @@ function App() {
       {/* <ImageSlider url={'https://picsum.photos/v2/list'} /> */}
       {/* <LoadMore /> */}
       {/* <TreeView menus={menus} /> */}
-      <QrGenerator />
+      {/* <QrGenerator /> */}
+      <ThemeSwitch />
     </div>
   );
 }

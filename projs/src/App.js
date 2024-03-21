@@ -8,6 +8,7 @@ import TreeView from './components/tree-view/TreeView';
 import menus from './components/tree-view/data';
 import QrGenerator from './components/qr-generator/QrGenerator';
 import ThemeSwitch from './components/theme-switch/ThemeSwitch';
+import ScrollIndicator from './components/scroll-indicator/ScrollIndicator';
 
 function App() {
   return ( 
@@ -19,7 +20,8 @@ function App() {
       {/* <LoadMore /> */}
       {/* <TreeView menus={menus} /> */}
       {/* <QrGenerator /> */}
-      <ThemeSwitch />
+      {/* <ThemeSwitch /> */}
+      <ScrollIndicator url={'https://dummyjson.com/products?limit=100'} />
     </div>
   );
 }

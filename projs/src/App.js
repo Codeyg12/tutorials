@@ -19,6 +19,7 @@ import FeatureFlag from "./components/feature-flag/FeatureFlag";
 import TestFetch from "./components/use-fetch/TestFetch";
 import TestOutsideClick from "./components/use-onclick-outside/TestOutsideClick";
 import TestResponsive from "./components/use-responsive/TestResponsive";
+import ScrollTopBottom from "./components/top-and-bottom/ScrollTopBottom";
 
 function App() {
   return (
@@ -42,7 +43,8 @@ function App() {
       </FeatureFlagGlobal> */}
       {/* <TestFetch /> */}
       {/* <TestOutsideClick /> */}
-      <TestResponsive />
+      {/* <TestResponsive /> */}
+      <ScrollTopBottom />
     </div>
   );
 }

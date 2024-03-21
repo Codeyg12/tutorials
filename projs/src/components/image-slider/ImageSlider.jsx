@@ -16,7 +16,6 @@ const ImageSlider = ({ url, limit = 5, page = 1 }) => {
 
       if (data) {
         setImages(data);
-        console.log(images);
       }
     } catch (err) {
       setErrorMsg(err.message);

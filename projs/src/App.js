@@ -20,6 +20,7 @@ import TestFetch from "./components/use-fetch/TestFetch";
 import TestOutsideClick from "./components/use-onclick-outside/TestOutsideClick";
 import TestResponsive from "./components/use-responsive/TestResponsive";
 import ScrollTopBottom from "./components/top-and-bottom/ScrollTopBottom";
+import ScrollToSection from "./components/scroll-to-section/ScrollToSection";
 
 function App() {
   return (
@@ -44,7 +45,8 @@ function App() {
       {/* <TestFetch /> */}
       {/* <TestOutsideClick /> */}
       {/* <TestResponsive /> */}
-      <ScrollTopBottom />
+      {/* <ScrollTopBottom /> */}
+      <ScrollToSection />
     </div>
   );
 }

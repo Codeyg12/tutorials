@@ -13,6 +13,7 @@ import TabTest from "./components/tabs/TabTest";
 import ModalTest from "./components/modal/ModalTest";
 import GithubFinder from "./components/github-finder/GithubFinder";
 import Autocomplete from "./components/autocomplete/Autocomplete";
+import TicTacToe from "./components/tic-tac-toe/TicTacToe";
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
       {/* <TabTest /> */}
       {/* <ModalTest /> */}
       {/* <GithubFinder /> */}
-      <Autocomplete />
+      {/* <Autocomplete /> */}
+      <TicTacToe />
     </div>
   );
 }

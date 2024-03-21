@@ -16,6 +16,7 @@ import Autocomplete from "./components/autocomplete/Autocomplete";
 import TicTacToe from "./components/tic-tac-toe/TicTacToe";
 import FeatureFlagGlobal from "./components/feature-flag/context/FeatureFlagContext";
 import FeatureFlag from "./components/feature-flag/FeatureFlag";
+import TestFetch from "./components/use-fetch/TestFetch";
 
 function App() {
   return (
@@ -34,9 +35,10 @@ function App() {
       {/* <GithubFinder /> */}
       {/* <Autocomplete /> */}
       {/* <TicTacToe /> */}
-      <FeatureFlagGlobal>
+      {/* <FeatureFlagGlobal>
         <FeatureFlag />
-      </FeatureFlagGlobal>
+      </FeatureFlagGlobal> */}
+      <TestFetch />
     </div>
   );
 }

@@ -18,6 +18,7 @@ import FeatureFlagGlobal from "./components/feature-flag/context/FeatureFlagCont
 import FeatureFlag from "./components/feature-flag/FeatureFlag";
 import TestFetch from "./components/use-fetch/TestFetch";
 import TestOutsideClick from "./components/use-onclick-outside/TestOutsideClick";
+import TestResponsive from "./components/use-responsive/TestResponsive";
 
 function App() {
   return (
@@ -40,7 +41,8 @@ function App() {
         <FeatureFlag />
       </FeatureFlagGlobal> */}
       {/* <TestFetch /> */}
-      <TestOutsideClick />
+      {/* <TestOutsideClick /> */}
+      <TestResponsive />
     </div>
   );
 }

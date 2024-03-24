@@ -9,13 +9,13 @@ newGame();
 
 function newGame() {
   state = {
-    phase: 'aiming',
+    phase: "aiming",
     currentPlayer: 1,
     bomb: {
-        x: undefined,
-        y: undefined,
-        rotation: 0,
-        velocity: {x: 0, y: 0}
+      x: undefined,
+      y: undefined,
+      rotation: 0,
+      velocity: { x: 0, y: 0 },
     },
     backgroundBuildings: [],
     buildings: [],
@@ -25,7 +25,7 @@ function newGame() {
   for (let i = 0; i < 10; i++) {
     generateBackgroundBuilding(i);
   }
-  
+
   for (let i = 0; i < 10; i++) {
     generateBuilding(i);
   }
@@ -41,7 +41,19 @@ function generateBuilding(i) {}
 
 function initalizeBombPosition() {}
 
-function draw() {}
+function draw() {
+  ctx.translate(0, canvas.height);
+  ctx.scale(1, -1);
+
+  drawBackground();
+  drawBackgroundBuildings();
+  drawBuildings();
+  drawGorilla(1);
+  drawGorilla(2);
+  drawBomb();
+
+  ctx.restore();
+}
 
 function throwBomb() {}
 

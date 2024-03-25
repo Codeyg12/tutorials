@@ -5,6 +5,12 @@ const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+const angle1DOM = document.querySelector("#info-left .angle");
+const angle2DOM = document.querySelector("#info-right .angle");
+const velocity1DOM = document.querySelector("#info-left .velocity");
+const velocity2DOM = document.querySelector("#info-right .velocity");
+const bombGrabAreaDOM = document.querySelector("#bomb-grab-area");
+
 newGame();
 
 function newGame() {
@@ -108,6 +114,12 @@ function initalizeBombPosition() {
   state.bomb.x = gorillaX + gorillaHandOffsetX;
   state.bomb.y = gorillaY + gorillaHandOffsetY;
   state.bomb.velocity = { x: 0, y: 0 };
+
+  const grabAreaRadius = 15;
+  const left = state.bomb.x * state.scale - grabAreaRadius;
+  const bottom = state.bomb.y * state.scale - grabAreaRadius;
+  bombGrabAreaDOM.style.left = `${left}px`;
+  bombGrabAreaDOM.style.bottom = `${bottom}px`;
 }
 
 function draw() {

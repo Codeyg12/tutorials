@@ -159,7 +159,117 @@ function drawBuildings() {
   });
 }
 
-function drawGorilla(player) {}
+function drawGorilla(player) {
+  ctx.save();
+
+  const building =
+    player === 1 ? state.buildings.at(1) : state.buildings.at(-2);
+
+  ctx.translate(building.x + building.width / 2, building.height);
+
+  drawGorillaBody();
+  drawGorillaFace(player);
+  drawGorillaArmLeft(player);
+  drawGorillaArmRight(player);
+
+  ctx.restore();
+}
+
+function drawGorillaBody() {
+  ctx.fillStyle = "#000000";
+
+  ctx.beginPath();
+  ctx.moveTo(0, 15);
+  ctx.lineTo(-7, 0);
+  ctx.lineTo(-20, 0);
+  ctx.lineTo(-17, 18);
+  ctx.lineTo(-20, 44);
+
+  ctx.lineTo(-11, 77);
+  ctx.lineTo(0, 84);
+  ctx.lineTo(11, 77);
+
+  ctx.lineTo(20, 44);
+  ctx.lineTo(17, 18);
+  ctx.lineTo(20, 0);
+  ctx.lineTo(7, 0);
+  ctx.fill();
+}
+
+function drawGorillaArmLeft(player) {
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 18;
+
+  ctx.beginPath();
+  ctx.moveTo(-14, 50);
+
+  if (state.phase === "aiming" && state.currentPlayer === 1 && player === 1) {
+    ctx.quadraticCurveTo(-44, 63, -28, 107);
+  } else if (state.phase === "celebrating" && state.currentPlayer === player) {
+    ctx.quadraticCurveTo(-44, 63, -28, 107);
+  } else {
+    ctx.quadraticCurveTo(-44, 63, -28, 107);
+  }
+  ctx.stroke();
+}
+
+function drawGorillaArmRight(player) {
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 18;
+
+  ctx.beginPath();
+  ctx.moveTo(14, 50);
+
+  if (state.phase === "aiming" && state.currentPlayer === 2 && player === 2) {
+    ctx.quadraticCurveTo(44, 63, 28, 107);
+  } else if (state.phase === "celebrating" && state.currentPlayer === player) {
+    ctx.quadraticCurveTo(44, 63, 28, 107);
+  } else {
+    ctx.quadraticCurveTo(44, 63, 28, 107);
+  }
+  ctx.stroke();
+}
+
+function drawGorillaFace(player) {
+  // Face
+  ctx.fillStyle = "lightgray";
+  ctx.beginPath();
+  ctx.arc(0, 63, 9, 0, 2 * Math.PI);
+  ctx.moveTo(-3.5, 70);
+  ctx.arc(-3.5, 70, 4, 0, 2 * Math.PI);
+  ctx.moveTo(3.5, 70);
+  ctx.arc(3.5, 70, 4, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Eyes
+  ctx.fillStyle = "black";
+  ctx.beginPath();
+  ctx.arc(-3.5, 70, 1.4, 0, 2 * Math.PI);
+  ctx.moveTo(3.5, 70);
+  ctx.arc(3.5, 70, 1.4, 0, 2 * Math.PI);
+  ctx.fill();
+
+  // Nose
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  ctx.moveTo(-3.5, 66.5);
+  ctx.lineTo(-1.5, 65);
+  ctx.moveTo(3.5, 66.5);
+  ctx.lineTo(1.5, 65);
+  ctx.stroke();
+
+  // Mouth
+  ctx.beginPath();
+  if (state.phase === "celebrating" && state.currentPlayer === player) {
+    ctx.moveTo(-5, 60);
+    ctx.quadraticCurveTo(0, 56, 5, 60);
+  } else {
+    ctx.moveTo(-5, 56);
+    ctx.quadraticCurveTo(0, 60, 5, 56);
+  }
+  ctx.stroke();
+}
 
 function drawBomb() {}
 

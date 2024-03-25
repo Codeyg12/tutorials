@@ -20,6 +20,7 @@ function newGame() {
     backgroundBuildings: [],
     buildings: [],
     blastHoles: [],
+    scale: 1,
   };
 
   for (let i = 0; i < 10; i++) {
@@ -30,9 +31,18 @@ function newGame() {
     generateBuilding(i);
   }
 
+  calculateScale();
+
   initalizeBombPosition();
 
   draw();
+}
+
+function calculateScale() {
+  const lastBuilding = state.buildings.at(-1);
+  const totalWidthOfCity = lastBuilding.x + lastBuilding.width;
+
+  state.scale = canvas.width / totalWidthOfCity;
 }
 
 function generateBackgroundBuilding(i) {
@@ -85,11 +95,25 @@ function generateBuilding(i) {
   state.buildings.push({ x, width, height, lightsOn });
 }
 
-function initalizeBombPosition() {}
+function initalizeBombPosition() {
+  const building =
+    state.currentPlayer === 1 ? state.buildings.at(1) : state.buildings.at(-2);
+
+  const gorillaX = building.x + building.width / 2;
+  const gorillaY = building.height;
+
+  const gorillaHandOffsetX = state.currentPlayer === 1 ? -28 : 28;
+  const gorillaHandOffsetY = 107;
+
+  state.bomb.x = gorillaX + gorillaHandOffsetX;
+  state.bomb.y = gorillaY + gorillaHandOffsetY;
+  state.bomb.velocity = { x: 0, y: 0 };
+}
 
 function draw() {
   ctx.translate(0, canvas.height);
   ctx.scale(1, -1);
+  ctx.scale(state.scale, state.scale);
 
   drawBackground();
   drawBackgroundBuildings();
@@ -102,12 +126,17 @@ function draw() {
 }
 
 function drawBackground() {
-  const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+  const gradient = ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    canvas.height / state.scale
+  );
   gradient.addColorStop(1, "#f8ba85");
   gradient.addColorStop(0, "#ffc28e");
 
   ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, canvas.width / state.scale, canvas.height / state.scale);
 
   ctx.fillStyle = "rgba(255, 255, 255, 0.6)";
   ctx.beginPath();
@@ -271,8 +300,27 @@ function drawGorillaFace(player) {
   ctx.stroke();
 }
 
-function drawBomb() {}
+function drawBomb() {
+  ctx.save();
+  ctx.translate(state.bomb.x, state.bomb.y);
+
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+  ctx.fill();
+
+  ctx.restore();
+}
 
 function throwBomb() {}
 
 function animate(timestamp) {}
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  calculateScale();
+  initalizeBombPosition();
+  draw();
+});

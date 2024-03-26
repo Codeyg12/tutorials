@@ -125,6 +125,7 @@ function initalizeBombPosition() {
   state.bomb.x = gorillaX + gorillaHandOffsetX;
   state.bomb.y = gorillaY + gorillaHandOffsetY;
   state.bomb.velocity = { x: 0, y: 0 };
+  state.bomb.rotation = 0;
 
   const grabAreaRadius = 15;
   const left = state.bomb.x * state.scale - grabAreaRadius;
@@ -348,12 +349,25 @@ function drawBomb() {
     ctx.moveTo(0, 0);
     ctx.lineTo(state.bomb.velocity.x, state.bomb.velocity.y);
     ctx.stroke();
-  }
 
-  ctx.fillStyle = "white";
-  ctx.beginPath();
-  ctx.arc(0, 0, 6, 0, 2 * Math.PI);
-  ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+    ctx.fill();
+  } else if (state.phase === "in flight") {
+    ctx.fillStyle = "yellow";
+    ctx.rotate(state.bomb.rotation);
+    ctx.beginPath();
+    ctx.moveTo(-8, -2);
+    ctx.quadraticCurveTo(0, 12, 8, -2);
+    ctx.quadraticCurveTo(0, 2, -8, -2);
+    ctx.fill();
+  } else {
+    ctx.fillStyle = "white";
+    ctx.beginPath();
+    ctx.arc(0, 0, 6, 0, 2 * Math.PI);
+    ctx.fill();
+  }
 
   ctx.restore();
 }
@@ -376,10 +390,15 @@ function animate(timestamp) {
   moveBomb(elapsedTime);
 
   // Hit detection
-  const miss = false;
+  const miss = checkFrameHit() || checkBuildingHit();
   const hit = false;
 
   if (miss) {
+    state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
+    state.phase = "aiming";
+    initalizeBombPosition();
+
+    draw();
     return;
   }
 
@@ -392,6 +411,31 @@ function animate(timestamp) {
   requestAnimationFrame(animate);
 }
 
+function checkFrameHit() {
+  if (
+    state.bomb.y < 0 ||
+    state.bomb.x < 0 ||
+    state.bomb.x > canvas.width / state.scale
+  ) {
+    return true;
+  }
+}
+
+function checkBuildingHit() {
+  for (let i = 0; i < state.buildings.length; i++) {
+    const building = state.buildings[i];
+
+    if (
+      state.bomb.x + 4 > building.x &&
+      state.bomb.x - 4 < building.x + building.width &&
+      state.bomb.y - 4 < 0 + building.height
+    ) {
+      state.blastHoles.push({ x: state.bomb.x, y: state.bomb.y });
+      return true;
+    }
+  }
+}
+
 function moveBomb(elapsedTime) {
   const multiplier = elapsedTime / 200;
 
@@ -399,6 +443,9 @@ function moveBomb(elapsedTime) {
 
   state.bomb.x += state.bomb.velocity.x * multiplier;
   state.bomb.y += state.bomb.velocity.y * multiplier;
+
+  const direction = state.currentPlayer === 1 ? -1 : 1;
+  state.bomb.rotation += direction * 5 * multiplier;
 }
 
 window.addEventListener("resize", () => {

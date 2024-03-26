@@ -1,15 +1,26 @@
 let state = {};
+let isDragging = false;
+let dragStartX = undefined;
+let dragStartY = undefined;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Left info panel
+const info1DOM = document.getElementById("info-left");
+const name1DOM = document.querySelector("#info-left .name");
 const angle1DOM = document.querySelector("#info-left .angle");
-const angle2DOM = document.querySelector("#info-right .angle");
 const velocity1DOM = document.querySelector("#info-left .velocity");
+
+// Right info panel
+const info2DOM = document.getElementById("info-right");
+const name2DOM = document.querySelector("#info-right .name");
+const angle2DOM = document.querySelector("#info-right .angle");
 const velocity2DOM = document.querySelector("#info-right .velocity");
-const bombGrabAreaDOM = document.querySelector("#bomb-grab-area");
+// The bomb's grab area
+const bombGrabAreaDOM = document.getElementById("bomb-grab-area");
 
 newGame();
 
@@ -123,6 +134,8 @@ function initalizeBombPosition() {
 }
 
 function draw() {
+  ctx.save();
+
   ctx.translate(0, canvas.height);
   ctx.scale(1, -1);
   ctx.scale(state.scale, state.scale);
@@ -336,3 +349,49 @@ window.addEventListener("resize", () => {
   initalizeBombPosition();
   draw();
 });
+
+bombGrabAreaDOM.addEventListener("mousedown", (event) => {
+  if (state.phase === "aiming") {
+    isDragging = true;
+    dragStartX = event.clientX;
+    dragStartY = event.clientY;
+
+    document.body.style.cursor = "grabbing";
+  }
+});
+
+window.addEventListener("mousemove", function (e) {
+  if (isDragging) {
+    let deltaX = e.clientX - dragStartX;
+    let deltaY = e.clientY - dragStartY;
+
+    state.bomb.velocity.x = -deltaX;
+    state.bomb.velocity.y = deltaY;
+    setInfo(deltaX, deltaY);
+
+    draw();
+  }
+});
+
+window.addEventListener("mouseup", (event) => {
+  if (isDragging) {
+    isDragging = false;
+    document.body.style.cursor = "default";
+
+    throwBomb();
+  }
+});
+
+function setInfo(deltaX, deltaY) {
+  const hypotenuse = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+  const angleInRadians = Math.asin(deltaY / hypotenuse);
+  const angleInDegrees = angleInRadians * (180 / Math.PI);
+
+  if (state.currentPlayer === 1) {
+    angle1DOM.innerText = Math.round(angleInDegrees);
+    velocity1DOM.innerText = Math.round(hypotenuse);
+  } else {
+    angle2DOM.innerText = Math.round(angleInDegrees);
+    velocity2DOM.innerText = Math.round(hypotenuse);
+  }
+}

@@ -2,6 +2,7 @@ let state = {};
 let isDragging = false;
 let dragStartX = undefined;
 let dragStartY = undefined;
+let blastHoleRadius = 18;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -143,7 +144,7 @@ function draw() {
 
   drawBackground();
   drawBackgroundBuildings();
-  drawBuildings();
+  drawBuildingsWithBlastHoles();
   drawGorilla(1);
   drawGorilla(2);
   drawBomb();
@@ -387,23 +388,26 @@ function animate(timestamp) {
 
   const elapsedTime = timestamp - previousAnimationTimestamp;
 
-  moveBomb(elapsedTime);
+  const hitDetectionPrecision = 10;
+  for (let i = 0; i < hitDetectionPrecision; i++) {
+    moveBomb(elapsedTime / hitDetectionPrecision);
 
-  // Hit detection
-  const miss = checkFrameHit() || checkBuildingHit();
-  const hit = false;
+    // Hit detection
+    const miss = checkFrameHit() || checkBuildingHit();
+    const hit = false;
 
-  if (miss) {
-    state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
-    state.phase = "aiming";
-    initalizeBombPosition();
+    if (miss) {
+      state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
+      state.phase = "aiming";
+      initalizeBombPosition();
 
-    draw();
-    return;
-  }
+      draw();
+      return;
+    }
 
-  if (hit) {
-    return;
+    if (hit) {
+      return;
+    }
   }
 
   draw();
@@ -430,10 +434,46 @@ function checkBuildingHit() {
       state.bomb.x - 4 < building.x + building.width &&
       state.bomb.y - 4 < 0 + building.height
     ) {
+      for (let j = 0; j < state.blastHoles.length; j++) {
+        const blastHole = state.blastHoles[j];
+
+        const horiontalDistance = state.bomb.x - blastHole.x;
+        const verticalDistance = state.bomb.y - blastHole.y;
+        const distance = Math.sqrt(
+          horiontalDistance ** 2 + verticalDistance ** 2
+        );
+
+        if (distance < blastHoleRadius) {
+          return false 
+        }
+      }
+
       state.blastHoles.push({ x: state.bomb.x, y: state.bomb.y });
       return true;
     }
   }
+}
+
+function drawBuildingsWithBlastHoles() {
+  ctx.save();
+
+  state.blastHoles.forEach((blastHole) => {
+    ctx.beginPath();
+    ctx.rect(
+      0,
+      0,
+      window.innerWidth / state.scale,
+      window.innerHeight / state.scale
+    );
+
+    ctx.arc(blastHole.x, blastHole.y, blastHoleRadius, 0, 2 * Math.PI, true);
+
+    ctx.clip();
+  });
+
+  drawBuildings();
+
+  ctx.restore();
 }
 
 function moveBomb(elapsedTime) {

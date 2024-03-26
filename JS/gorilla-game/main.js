@@ -20,8 +20,13 @@ const info2DOM = document.getElementById("info-right");
 const name2DOM = document.querySelector("#info-right .name");
 const angle2DOM = document.querySelector("#info-right .angle");
 const velocity2DOM = document.querySelector("#info-right .velocity");
+
 // The bomb's grab area
 const bombGrabAreaDOM = document.getElementById("bomb-grab-area");
+
+const congratulateDOM = document.getElementById("congratulations");
+const winnerDOM = document.getElementById("winner");
+const newGameButtonDOM = document.getElementById("new-game");
 
 newGame();
 
@@ -50,8 +55,13 @@ function newGame() {
   }
 
   calculateScale();
-
   initalizeBombPosition();
+
+  congratulateDOM.style.visibility = "hidden";
+  angle1DOM.innerText = 0;
+  velocity1DOM.innerText = 0;
+  angle2DOM.innerText = 0;
+  velocity2DOM.innerText = 0;
 
   draw();
 }
@@ -269,7 +279,7 @@ function drawGorillaArmLeft(player) {
   } else if (state.phase === "celebrating" && state.currentPlayer === player) {
     ctx.quadraticCurveTo(-44, 63, -28, 107);
   } else {
-    ctx.quadraticCurveTo(-44, 63, -28, 107);
+    ctx.quadraticCurveTo(-44, 45, -28, 12);
   }
   ctx.stroke();
 }
@@ -291,7 +301,7 @@ function drawGorillaArmRight(player) {
   } else if (state.phase === "celebrating" && state.currentPlayer === player) {
     ctx.quadraticCurveTo(44, 63, 28, 107);
   } else {
-    ctx.quadraticCurveTo(44, 63, 28, 107);
+    ctx.quadraticCurveTo(44, 45, 28, 12);
   }
   ctx.stroke();
 }
@@ -394,7 +404,7 @@ function animate(timestamp) {
 
     // Hit detection
     const miss = checkFrameHit() || checkBuildingHit();
-    const hit = false;
+    const hit = checkGorillaHit();
 
     if (miss) {
       state.currentPlayer = state.currentPlayer === 1 ? 2 : 1;
@@ -406,6 +416,10 @@ function animate(timestamp) {
     }
 
     if (hit) {
+      state.phase = "celebrating";
+      announceWinner();
+
+      draw();
       return;
     }
   }
@@ -444,7 +458,7 @@ function checkBuildingHit() {
         );
 
         if (distance < blastHoleRadius) {
-          return false 
+          return false;
         }
       }
 
@@ -452,6 +466,31 @@ function checkBuildingHit() {
       return true;
     }
   }
+}
+
+function checkGorillaHit() {
+  const enemyPlayer = state.currentPlayer === 1 ? 2 : 1;
+  const enemyBuilding =
+    enemyPlayer === 1 ? state.buildings.at(1) : state.buildings.at(-2);
+
+  ctx.save();
+
+  ctx.translate(
+    enemyBuilding.x + enemyBuilding.width / 2,
+    enemyBuilding.height
+  );
+  drawGorillaBody();
+  let hit = ctx.isPointInPath(state.bomb.x, state.bomb.y);
+
+  drawGorillaArmLeft(enemyPlayer);
+  hit ||= ctx.isPointInPath(state.bomb.x, state.bomb.y);
+
+  drawGorillaArmRight(enemyPlayer);
+  hit ||= ctx.isPointInPath(state.bomb.x, state.bomb.y);
+
+  ctx.restore();
+
+  return hit;
 }
 
 function drawBuildingsWithBlastHoles() {
@@ -542,3 +581,10 @@ function setInfo(deltaX, deltaY) {
     velocity2DOM.innerText = Math.round(hypotenuse);
   }
 }
+
+function announceWinner() {
+  winnerDOM.innerText = `Player ${state.currentPlayer}`;
+  congratulateDOM.style.visibility = "visible";
+}
+
+newGameButtonDOM.addEventListener("click", newGame);

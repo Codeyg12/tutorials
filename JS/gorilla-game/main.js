@@ -5,7 +5,7 @@ let dragStartY = undefined;
 let blastHoleRadius = 18;
 let simulationMode = false;
 let simulationImpact = {};
-let numberOfPlayers = 1
+let numberOfPlayers = 1;
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -400,7 +400,6 @@ function throwBomb() {
   }
 }
 
-
 function animate(timestamp) {
   if (previousAnimationTimestamp === undefined) {
     previousAnimationTimestamp = timestamp;
@@ -418,10 +417,9 @@ function animate(timestamp) {
     const miss = checkFrameHit() || checkBuildingHit();
     const hit = checkGorillaHit();
 
-  
     if (simulationMode && (hit || miss)) {
       simulationImpact = { x: state.bomb.x, y: state.bomb.y };
-      return; // Simulation ended, return from the loop
+      return;
     }
 
     if (miss) {
@@ -432,8 +430,11 @@ function animate(timestamp) {
 
       draw();
 
-      const computerThowsNext = numberOfPlayers === 0 || (numberOfPlayers === 1 && state.currentPlayer === 2);
-      if (computerThowsNext) setTimeout(computerThrow, 50);
+      const computerThrowsNext =
+        numberOfPlayers === 0 ||
+        (numberOfPlayers === 1 && state.currentPlayer === 2);
+      if (computerThrowsNext) setTimeout(computerThrow, 50);
+
       return;
     }
 
@@ -489,7 +490,9 @@ function checkBuildingHit() {
         }
       }
 
-      state.blastHoles.push({ x: state.bomb.x, y: state.bomb.y });
+      if (!simulationMode) {
+        state.blastHoles.push({ x: state.bomb.x, y: state.bomb.y });
+      }
       return true;
     }
   }

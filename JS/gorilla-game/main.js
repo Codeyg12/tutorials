@@ -341,6 +341,13 @@ function drawBomb() {
 
   if (state.phase === "aiming") {
     ctx.translate(-state.bomb.velocity.x / 6.25, -state.bomb.velocity.y / 6.25);
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.setLineDash([3, 8]);
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(state.bomb.velocity.x, state.bomb.velocity.y);
+    ctx.stroke();
   }
 
   ctx.fillStyle = "white";
@@ -351,9 +358,48 @@ function drawBomb() {
   ctx.restore();
 }
 
-function throwBomb() {}
+function throwBomb() {
+  state.phase = "in flight";
+  previousAnimationTimestamp = undefined;
+  requestAnimationFrame(animate);
+}
 
-function animate(timestamp) {}
+function animate(timestamp) {
+  if (previousAnimationTimestamp === undefined) {
+    previousAnimationTimestamp = timestamp;
+    requestAnimationFrame(animate);
+    return;
+  }
+
+  const elapsedTime = timestamp - previousAnimationTimestamp;
+
+  moveBomb(elapsedTime);
+
+  // Hit detection
+  const miss = false;
+  const hit = false;
+
+  if (miss) {
+    return;
+  }
+
+  if (hit) {
+    return;
+  }
+
+  draw();
+  previousAnimationTimestamp = timestamp;
+  requestAnimationFrame(animate);
+}
+
+function moveBomb(elapsedTime) {
+  const multiplier = elapsedTime / 200;
+
+  state.bomb.velocity.y -= 20 * multiplier;
+
+  state.bomb.x += state.bomb.velocity.x * multiplier;
+  state.bomb.y += state.bomb.velocity.y * multiplier;
+}
 
 window.addEventListener("resize", () => {
   canvas.width = window.innerWidth;

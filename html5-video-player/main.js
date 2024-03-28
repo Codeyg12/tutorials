@@ -6,6 +6,9 @@ const rewindBtn = document.querySelector("#rewind");
 const fastForwardBtn = document.querySelector("#fast-forward");
 const volumeBtn = document.querySelector("#volume");
 const progressIndicator = document.querySelector("#progress-indicator");
+const progessBar = document.querySelector("#progress-bar");
+
+let mouseIsDown = false;
 
 function playNpauseFn() {
   video.paused ? video.play() : video.pause();
@@ -38,6 +41,12 @@ function updateProgress() {
   progressIndicator.style.width = `${progressPercentage}%`;
 }
 
+function seekingFn(e) {
+  const updatedTime = (e.offsetX / progessBar.offsetWidth) * video.duration;
+
+  video.currentTime = updatedTime;
+}
+
 video.addEventListener("play", updatePlayNPauseIcon);
 video.addEventListener("click", playNpauseFn);
 video.addEventListener("pause", updatePlayNPauseIcon);
@@ -47,3 +56,7 @@ fastForwardBtn.addEventListener("click", () => rewindNforwardFn("forward"));
 video.addEventListener("volumechange", updateVolumeIcon);
 volumeBtn.addEventListener("click", muteNunmuteFn);
 video.addEventListener("timeupdate", updateProgress);
+progessBar.addEventListener("mousedown", () => (mouseIsDown = true));
+progessBar.addEventListener("mouseup", () => (mouseIsDown = false));
+progessBar.addEventListener("click", seekingFn);
+progessBar.addEventListener("mousemove", (e) => mouseIsDown && seekingFn);

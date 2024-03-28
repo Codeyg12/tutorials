@@ -4,6 +4,7 @@ const playNpauseBtn = document.querySelector("#play-pause");
 const video = document.querySelector("video");
 const rewindBtn = document.querySelector("#rewind");
 const fastForwardBtn = document.querySelector("#fast-forward");
+const volumeBtn = document.querySelector("#volume");
 
 function playNpauseFn() {
   video.paused ? video.play() : video.pause();
@@ -20,10 +21,21 @@ function rewindNforwardFn(type) {
   video.currentTime += type === "rewind" ? -10 : 10;
 }
 
+function muteNunmuteFn() {
+  video.muted = video.muted ? false : true;
+}
+
+function updateVolumeIcon() {
+  const icon = volumeBtn.querySelector("i");
+  icon.textContent = "";
+  icon.textContent = video.muted ? "volume_off" : "volume_up";
+}
 
 video.addEventListener("play", updatePlayNPauseIcon);
-video.addEventListener('click', playNpauseFn)
+video.addEventListener("click", playNpauseFn);
 video.addEventListener("pause", updatePlayNPauseIcon);
 playNpauseBtn.addEventListener("click", playNpauseFn);
 rewindBtn.addEventListener("click", () => rewindNforwardFn("rewind"));
 fastForwardBtn.addEventListener("click", () => rewindNforwardFn("forward"));
+video.addEventListener("volumechange", updateVolumeIcon);
+volumeBtn.addEventListener("click", muteNunmuteFn);

@@ -1,3 +1,8 @@
+<script>
+
+  import { openModal } from "../store";
+
+</script>
 <header class="flex flex-col relative z-20">
   <div
     class="max-w-[1400px] mx-auto w-full flex items-center justify-between p-4 py-6"
@@ -7,7 +12,7 @@
         Swoley <span class="text-indigo-400">Moley</span>
       </h1>
     </a>
-    <button class="md:hidden grid place-items-center">
+    <button on:click={() => $openModal = true} class="md:hidden grid place-items-center">
       <i class="fas fa-bars"></i>
     </button>
     <nav class="hidden items-center gap-4 md:flex lg:gap-6">

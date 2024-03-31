@@ -1,13 +1,18 @@
 <script>
   import "../app.css";
   import Footer from "../components/Footer.svelte";
+  import CtAs from "../components/CtAs.svelte";
 
   import { openModal } from "../store";
+  import Header from "../components/Header.svelte";
 
   let y;
   $: outerHeight = 0;
 
-  function reroute(href) {}
+  function reroute(href) {
+    $openModal = false;
+    window.location.href = href;
+  }
 </script>
 
 {#if $openModal}
@@ -25,8 +30,46 @@
         <i class="fas fa-times text-2xl"></i>
       </button>
     </div>
+    <div class="flex flex-col gap-4 flex-1">
+      <button
+        on:click={() => reroute("#product")}
+        class="border-none outline-none p-2 group duration-200 cursor-pointer text-left"
+      >
+        <p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">
+          Product <i class="fa-solid fa-chevron-right text-xl pl-4" />
+        </p>
+      </button>
+      <button
+        on:click={() => reroute("#review")}
+        class="border-none outline-none p-2 group duration-200 cursor-pointer text-left"
+      >
+        <p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">
+          Reviews <i class="fa-solid fa-chevron-right text-xl pl-4" />
+        </p>
+      </button>
+      <button
+        on:click={() => reroute("#faq")}
+        class="border-none outline-none p-2 group duration-200 cursor-pointer text-left"
+      >
+        <p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">
+          FAQs <i class="fa-solid fa-chevron-right text-xl pl-4" />
+        </p>
+      </button>
+    </div>
+    <div class="flex flex-col items-center justify-center">
+      <CtAs />
+    </div>
   </div>
 {/if}
+
+{#if y > outerHeight}
+  <div
+    class="bg-white fixed top-0 left-0 w-full flex flex-col z-20 px-4 fadeIn"
+  >
+    <Header />
+  </div>
+{/if}
+
 <slot />
 <Footer />
 <svelte:window bind:scrollY={y} bind:outerHeight />

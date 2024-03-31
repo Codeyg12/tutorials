@@ -44,7 +44,7 @@
   ];
 </script>
 
-<SectionWrapper id='faq'>
+<SectionWrapper id="faq">
   <div
     class="flex flex-col gap-10 sm:gap-14 md:gap-24 py-20 flex-1 items-center justify-center"
   >

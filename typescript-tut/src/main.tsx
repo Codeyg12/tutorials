@@ -5,4 +5,4 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(<App />);a
+ReactDOM.createRoot(document.getElementById('root')!).render(<App />);

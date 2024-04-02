@@ -1,7 +1,9 @@
+import Component from "./components";
+
 function App() {
   return (
     <main>
-      <h2>React & Typescript</h2>
+      <Component name="Codey" id={314} children={<h1>hi</h1>} />
     </main>
   );
 }

@@ -64,7 +64,7 @@
 //   }
 // }
 
-// //* Countdown 
+// //* Countdown
 // int DP = 3;
 // int C = 4;
 // int D = 5;
@@ -301,7 +301,7 @@
 // }
 
 // void loop() {
-//   Serial.println('Set a timer for seconds, maximum: 9999');
+//   Serial.println("Set a timer for seconds, maximum: 9999");
 //   while (Serial.available() == 0) {
 //   }
 

@@ -265,3 +265,73 @@
 //   digitalWrite(D4, LOW);
 //   delay(delayTime);
 // }
+
+// //* Countdown with buzzer
+// #include <SevSeg.h>
+
+// int A = 2;
+// int B = 7;
+// int C = 11;
+// int D = 9;
+// int E = 8;
+// int F = 3;
+// int G = 12;
+// int DP = 10;
+// int D1 = 4;
+// int D2 = 5;
+// int D3 = 6;
+// int D4 = 13;
+// int userInput;
+// int buzzPin = A3;
+// int delayTime = 5;
+// #include "SevSeg.h"
+
+// SevSeg sevseg;
+
+// byte numDigits = 4;
+// byte digitPins[] = { D1, D2, D3, D4 };
+// byte segmentPins[] = { A, B, C, D, E, F, G, DP };
+// bool resistorsOnSegments = true;
+// byte hardwareConfig = COMMON_CATHODE;
+
+// void setup() {
+//   sevseg.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments);
+//   sevseg.setBrightness(90);
+//   Serial.begin(9600);
+// }
+
+// void loop() {
+//   Serial.println('Set a timer for seconds, maximum: 9999');
+//   while (Serial.available() == 0) {
+//   }
+
+//   userInput = Serial.parseInt();
+//   if (userInput <= 9999 && userInput > 0) {
+//     // Serial.println(userInput);
+//     while (userInput > 0) {
+//       sevseg.setNumber(userInput);
+
+//       refreshAndReset(200);
+
+//       sevseg.refreshDisplay();
+//       userInput = userInput - 1;
+//       sevseg.refreshDisplay();
+//     }
+
+//     analogWrite(buzzPin, 255);
+//     delay(5000);
+//     analogWrite(buzzPin, 0);
+//     sevseg.blank();
+//   } else {
+//     Serial.println("Maximum number is 9999. Try again pal!");
+//   }
+// }
+
+// void refreshAndReset(int num) {
+//   // repeat num times
+//   while(num > 0) {
+// sevseg.refreshDisplay();
+//       delay(delayTime);
+//       num--;
+//   }
+// }

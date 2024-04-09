@@ -7,7 +7,8 @@ let simulationMode = false;
 let simulationImpact = {};
 let numberOfPlayers = 1;
 
-const canvas = document.getElementById("game");
+const canvas = document.getElementById("canvas");
+console.log(canvas);
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;

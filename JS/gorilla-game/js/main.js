@@ -1,4 +1,5 @@
 import { BackgroundBuildings } from "./background.js";
+import { Building } from "./building.js";
 window.addEventListener("load", () => {
   const ctx = canvas.getContext("2d");
   canvas.width = window.innerWidth;
@@ -11,6 +12,7 @@ window.addEventListener("load", () => {
       this.currentPlayer = 1;
       this.round = 1;
       this.background = new BackgroundBuildings(this);
+      this.building = new Building(this);
       this.backgroundBuildings = [];
       this.buildings = [];
       this.blastHoles = [];
@@ -20,6 +22,10 @@ window.addEventListener("load", () => {
     update() {
       for (let i = 0; i < 10; i++) {
         this.background.update(i);
+      }
+
+      for (let i = 0; i < 10; i++) {
+        this.building.update(i)
       }
     }
 
@@ -31,6 +37,7 @@ window.addEventListener("load", () => {
       ctx.scale(this.scale, this.scale);
 
       this.background.draw(context);
+      this.building.draw(context)
       ctx.restore();
     }
   }

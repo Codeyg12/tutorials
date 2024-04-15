@@ -44,10 +44,6 @@ function newGame() {
       rotation: 0,
       velocity: { x: 0, y: 0 },
     },
-    backgroundBuildings: [],
-    buildings: [],
-    blastHoles: [],
-    scale: 1,
   };
 
   calculateScale();

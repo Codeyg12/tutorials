@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
       this.backgroundBuildings = [];
       this.buildings = [];
       this.blastHoles = [];
-      this.scale = 1;
+      this.scale = 1.5;
     }
 
     update() {

@@ -1,0 +1,82 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5ixuamgcim4y"]
+
+[ext_resource type="Texture2D" uid="uid://fvyuq31617vq" path="res://Pickups/Cheery/cherry.png" id="1_4xco3"]
+
+[sub_resource type="GDScript" id="GDScript_140kq"]
+script/source = "extends Area2D
+
+
+
+func _on_body_entered(body):
+	if body.name == \"Player\":
+		Game.Gold += 5
+		Game.playerHP += 1
+		var tween = get_tree().create_tween()
+		var tween1 = get_tree().create_tween()
+		tween.tween_property(self, \"position\", position - Vector2(0, 30), .4)
+		tween1.tween_property(self, \"modulate:a\", 0, 0.3)
+		tween.tween_callback(queue_free)
+		
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cyya8"]
+radius = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6egdb"]
+atlas = ExtResource("1_4xco3")
+region = Rect2(0, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6sps"]
+atlas = ExtResource("1_4xco3")
+region = Rect2(21, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frgal"]
+atlas = ExtResource("1_4xco3")
+region = Rect2(42, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5t7q"]
+atlas = ExtResource("1_4xco3")
+region = Rect2(63, 0, 21, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpl0s"]
+atlas = ExtResource("1_4xco3")
+region = Rect2(84, 0, 21, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yma4b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6egdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6sps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frgal")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5t7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpl0s")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Cherry" type="Area2D"]
+script = SubResource("GDScript_140kq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cyya8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.25, -1.25)
+scale = Vector2(0.880952, 0.880952)
+sprite_frames = SubResource("SpriteFrames_yma4b")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.431806
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

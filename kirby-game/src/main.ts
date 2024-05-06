@@ -1,3 +1,4 @@
+import { makePlayer, setControls } from "./entities";
 import { k } from "./kaboomCtx";
 import { makeMap } from "./utils";
 
@@ -18,22 +19,39 @@ async function gameSetup() {
     },
   });
 
-  k.loadSprite('level-1', './level-1.png');
+  k.loadSprite("level-1", "./level-1.png");
 
-  const {map: level1Layout, spawnPoints: level1SpawnPoints} = await makeMap(k ,'level-1')
+  const { map: level1Layout, spawnPoints: level1SpawnPoints } = await makeMap(
+    k,
+    "level-1"
+  );
 
-  k.scene('level-1', () => {
+  k.scene("level-1", () => {
     k.setGravity(2100);
     k.add([
-        k.rect(k.width(), k.height()),
-        k.color(k.Color.fromHex("#f7d7db")),
-        k.fixed()
-    ])
+      k.rect(k.width(), k.height()),
+      k.color(k.Color.fromHex("#f7d7db")),
+      k.fixed(),
+    ]);
 
-    k.add(level1Layout)
-  })
+    k.add(level1Layout);
 
-k.go('level-1')
+    const kirb = makePlayer(
+      k,
+      level1SpawnPoints.player[0].x,
+      level1SpawnPoints.player[0].y
+    );
+
+    setControls(k, kirb)
+    k.add(kirb);
+    k.camScale(0.7, 0.7);
+    k.onUpdate(() => {
+      if (kirb.pos.x < level1Layout.pos.x + 432)
+        k.camPos(kirb.pos.x + 500, 800);
+    });
+  });
+
+  k.go("level-1");
 }
 
 gameSetup();

@@ -47,7 +47,7 @@ async function gameSetup() {
     k.camScale(0.7, 0.7);
     k.onUpdate(() => {
       if (kirb.pos.x < level1Layout.pos.x + 432)
-        k.camPos(kirb.pos.x + 500, 800);
+        k.camPos(kirb.pos.x + 500, 870);
     });
   });
 

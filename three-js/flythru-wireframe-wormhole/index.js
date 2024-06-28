@@ -39,7 +39,7 @@ const line = new THREE.Line(geometry, material);
 // scene.add(line);
 
 // create a tube geometry from the spline
-const tubeGeo = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
+const tubeGeo = new THREE.TubeGeometry(spline, 222, 0.65, 15, true);
 
 // create edges geometry from the spline
 const edges = new THREE.EdgesGeometry(tubeGeo, 0.2);
@@ -52,7 +52,7 @@ const size = 0.075;
 const boxGeo = new THREE.BoxGeometry(size, size, size);
 for (let i = 0; i < numBoxes; i += 1) {
   const boxMat = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
+    color: 0xff0000,
     wireframe: true
   });
   const box = new THREE.Mesh(boxGeo, boxMat);

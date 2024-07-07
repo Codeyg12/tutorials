@@ -1,11 +1,17 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { Button } from './components/ui/button'
+import HomePage from './pages/HomePage'
+import RecipePage from './pages/RecipePage'
 
 function App() {
 
   return (
     <>
-    <Button>Hi There</Button>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path='/recipes/:recipeId' element={<RecipePage />} />
+      <Route path='*' element={<p>This page doesn't exist!</p>} />
+    </Routes>
     </>
   )
 }

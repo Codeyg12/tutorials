@@ -1,9 +1,10 @@
+import { RecipeType } from "@/types";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export default function RecipePage() {
   const { recipeId } = useParams();
-  const [recipe, setRecipe] = useState();
+  const [recipe, setRecipe] = useState<RecipeType>();
 
   useEffect(() => {
     const fetchRecipe = async () => {

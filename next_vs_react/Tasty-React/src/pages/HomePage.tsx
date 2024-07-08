@@ -43,10 +43,7 @@ export default function HomePage() {
     }
   }, [badge]);
 
-  const handleClick = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    cuisine: string
-  ) => {
+  const handleClick = (e: React.MouseEvent, cuisine: string) => {
     e.preventDefault();
     setBadge(cuisine);
   };

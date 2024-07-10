@@ -29,10 +29,14 @@ import { useResources } from "@/hooks/use-resource";
 
 interface MediaGalleryProps {
   resources: Array<CloudinaryResource>;
+  tag?: string;
 }
 
-const MediaGallery = ({ resources: initialResources }: MediaGalleryProps) => {
-  const { resources } = useResources({ initialResources });
+const MediaGallery = ({
+  resources: initialResources,
+  tag,
+}: MediaGalleryProps) => {
+  const { resources } = useResources({ initialResources, tag });
 
   const [selected, setSelected] = useState<Array<string>>([]);
   const [creation, setCreation] = useState();

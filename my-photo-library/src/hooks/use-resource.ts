@@ -1,11 +1,13 @@
 import { CloudinaryResource } from "@/types/cloudinary";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface UseResources {
-  initialResources: Array<CloudinaryResource>;
+  initialResources?: Array<CloudinaryResource>;
 }
 
-export function useResources(options: UseResources) {
+export function useResources(options?: UseResources) {
+  const queryClient = useQueryClient();
+
   const { data: resources } = useQuery({
     queryKey: ["resources"],
     queryFn: async () => {
@@ -15,7 +17,20 @@ export function useResources(options: UseResources) {
     initialData: options?.initialResources,
   });
 
+  function addResources(results: Array<CloudinaryResource>) {
+    queryClient.setQueryData(
+      ["resources"],
+      (old: Array<CloudinaryResource>) => {
+        return [...results, ...old];
+      }
+    );
+    queryClient.invalidateQueries({
+      queryKey: ["resources"],
+    });
+  }
+
   return {
     resources,
+    addResources,
   };
 }

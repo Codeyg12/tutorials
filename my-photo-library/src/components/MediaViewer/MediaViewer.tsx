@@ -47,7 +47,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { CloudinaryResource } from "@/types/cloudinary";
-import { CldImageProps } from "next-cloudinary";
+import { CldImageProps, getCldImageUrl } from "next-cloudinary";
 
 interface Deletion {
   state: string;
@@ -154,6 +154,30 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
     if (!isOpen) {
       setDeletion(undefined);
     }
+  }
+
+  /**
+   * handleOnSave
+   */
+
+  async function handleOnSave() {
+    const url = getCldImageUrl({
+      width: resource.width,
+      height: resource.height,
+      src: resource.public_id,
+      format: "default",
+      quality: "default",
+      ...transformations,
+    });
+
+    await fetch(url);
+
+    const results = await fetch("/api/upload", {
+      method: "POST",
+      body: JSON.stringify({ publicId: resource.public_id, url }),
+    }).then((r) => r.json());
+
+    closeMenus();
   }
 
   // Listen for clicks outside of the panel area and if determined
@@ -437,6 +461,7 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
               <Button
                 variant="ghost"
                 className="w-full h-14 text-left justify-center items-center bg-blue-500"
+                onClick={handleOnSave}
               >
                 <span className="text-[1.01rem]">Save</span>
               </Button>

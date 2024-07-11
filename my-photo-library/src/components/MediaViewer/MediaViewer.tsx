@@ -13,6 +13,8 @@ import {
   Wand2,
   Image,
   Ban,
+  PencilRuler,
+  ScissorsSquare,
 } from "lucide-react";
 
 import Container from "@/components/Container";
@@ -41,7 +43,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { CloudinaryResource } from "@/types/cloudinary";
-import { CldImage } from "next-cloudinary";
+import { CldImage, CldImageProps } from "next-cloudinary";
 
 interface Deletion {
   state: string;
@@ -56,6 +58,19 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
   const [filterSheetIsOpen, setFilterSheetIsOpen] = useState(false);
   const [infoSheetIsOpen, setInfoSheetIsOpen] = useState(false);
   const [deletion, setDeletion] = useState<Deletion>();
+
+  const [enhancement, setEnhancement] = useState<string>();
+
+  type Transformations = Omit<CldImageProps, "src" | "alt">;
+  const transformations: Transformations = {};
+
+  if (enhancement === "restore") {
+    transformations.restore = true;
+  } else if (enhancement === "improve") {
+    transformations.improve = true;
+  } else if (enhancement === "remove-background") {
+    transformations.removeBackground = true;
+  }
 
   // Canvas sizing based on the image dimensions. The tricky thing about
   // showing a single image in a space like this in a responsive way is trying
@@ -186,10 +201,55 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
                 <li>
                   <Button
                     variant="ghost"
-                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 border-white`}
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      !enhancement ? "border-white" : "border-transparent"
+                    }`}
+                    onClick={() => setEnhancement(undefined)}
                   >
                     <Ban className="w-5 h-5 mr-3" />
                     <span className="text-[1.01rem]">None</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      enhancement === "improve"
+                        ? "border-white"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setEnhancement("improve")}
+                  >
+                    <Wand2 className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Improve</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      enhancement === "restore"
+                        ? "border-white"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setEnhancement("restore")}
+                  >
+                    <PencilRuler className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Restore</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      enhancement === "remove-background"
+                        ? "border-white"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setEnhancement("remove-background")}
+                  >
+                    <ScissorsSquare className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Remove Background</span>
                   </Button>
                 </li>
               </ul>
@@ -370,6 +430,7 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
           src={resource.public_id}
           alt={`Image ${resource.public_id}`}
           style={imgStyles}
+          {...transformations}
         />
       </div>
     </div>

@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import Container from "@/components/Container";
+import CldImage from "@/components/CldImage";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -43,7 +44,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { CloudinaryResource } from "@/types/cloudinary";
-import { CldImage, CldImageProps } from "next-cloudinary";
+import { CldImageProps } from "next-cloudinary";
 
 interface Deletion {
   state: string;
@@ -424,6 +425,7 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
 
       <div className="relative flex justify-center items-center align-center w-full h-full">
         <CldImage
+          key={JSON.stringify(transformations)}
           className="object-contain"
           width={resource.width}
           height={resource.height}

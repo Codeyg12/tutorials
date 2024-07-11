@@ -15,6 +15,9 @@ import {
   Ban,
   PencilRuler,
   ScissorsSquare,
+  Square,
+  RectangleHorizontal,
+  RectangleVertical,
 } from "lucide-react";
 
 import Container from "@/components/Container";
@@ -61,6 +64,7 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
   const [deletion, setDeletion] = useState<Deletion>();
 
   const [enhancement, setEnhancement] = useState<string>();
+  const [crop, setCrop] = useState<string>();
 
   type Transformations = Omit<CldImageProps, "src" | "alt">;
   const transformations: Transformations = {};
@@ -73,6 +77,30 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
     transformations.removeBackground = true;
   }
 
+  if (crop === "square") {
+    if (resource.width > resource.height) {
+      transformations.height = resource.width;
+    } else {
+      transformations.width = resource.height;
+    }
+    transformations.crop = {
+      source: true,
+      type: "fill",
+    };
+  } else if (crop === "landscape") {
+    transformations.height = Math.floor(resource.width / (16 / 9));
+    transformations.crop = {
+      source: true,
+      type: "fill",
+    };
+  } else if (crop === "portrait") {
+    transformations.width = Math.floor(resource.height / (16 / 9));
+    transformations.crop = {
+      source: true,
+      type: "fill",
+    };
+  }
+
   // Canvas sizing based on the image dimensions. The tricky thing about
   // showing a single image in a space like this in a responsive way is trying
   // to take up as much room as possible without distorting it or upscaling
@@ -80,8 +108,8 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
   // determine whether it's landscape, portrait, or square, and change a little
   // CSS to make it appear centered and scalable!
 
-  const canvasHeight = resource.height;
-  const canvasWidth = resource.width;
+  const canvasHeight = transformations.height || resource.height;
+  const canvasWidth = transformations.width || resource.width;
 
   const isSquare = canvasHeight === canvasWidth;
   const isLandscape = canvasWidth > canvasHeight;
@@ -265,10 +293,53 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
                 <li>
                   <Button
                     variant="ghost"
-                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 border-white`}
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      !crop ? "border-white" : "border-transparent"
+                    }`}
+                    onClick={() => setCrop(undefined)}
                   >
                     <Image className="w-5 h-5 mr-3" />
                     <span className="text-[1.01rem]">Original</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      crop === "square" ? "border-white" : "border-transparent"
+                    }`}
+                    onClick={() => setCrop("square")}
+                  >
+                    <Square className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Square</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      crop === "landscape"
+                        ? "border-white"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setCrop("landscape")}
+                  >
+                    <RectangleHorizontal className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Landscape</span>
+                  </Button>
+                </li>
+                <li>
+                  <Button
+                    variant="ghost"
+                    className={`text-left justify-start w-full h-14 border-4 bg-zinc-700 ${
+                      crop === "portrait"
+                        ? "border-white"
+                        : "border-transparent"
+                    }`}
+                    onClick={() => setCrop("portrait")}
+                  >
+                    <RectangleVertical className="w-5 h-5 mr-3" />
+                    <span className="text-[1.01rem]">Portrait</span>
                   </Button>
                 </li>
               </ul>

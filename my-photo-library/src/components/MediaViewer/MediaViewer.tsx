@@ -18,6 +18,7 @@ import {
   Square,
   RectangleHorizontal,
   RectangleVertical,
+  Loader2,
 } from "lucide-react";
 
 import Container from "@/components/Container";
@@ -49,6 +50,7 @@ import {
 import { CloudinaryResource } from "@/types/cloudinary";
 import { CldImageProps, getCldImageUrl } from "next-cloudinary";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Deletion {
   state: string;
@@ -56,6 +58,8 @@ interface Deletion {
 
 const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
   const sheetFiltersRef = useRef<HTMLDivElement | null>(null);
   const sheetInfoRef = useRef<HTMLDivElement | null>(null);
 
@@ -170,6 +174,32 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
     }
   }
 
+  function invalidateQueries() {
+    queryClient.invalidateQueries({
+      queryKey: [
+        "resources",
+        String(process.env.NEXT_PUBLIC_CLOUDINARY_LIBRARY_TAG),
+      ],
+    });
+  }
+
+  /**
+   * handleOnDelete
+   */
+  async function handleOnDelete() {
+    if (deletion?.state === "deleting") return;
+    setDeletion({
+      state: "deleting",
+    });
+    await fetch("/api/delete", {
+      method: "POST",
+      body: JSON.stringify({ publicId: resource.public_id }),
+    });
+
+    invalidateQueries();
+    router.push("/");
+  }
+
   /**
    * handleOnSave
    */
@@ -190,6 +220,8 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
       method: "POST",
       body: JSON.stringify({ publicId: resource.public_id, url }),
     }).then((r) => r.json());
+
+    invalidateQueries();
 
     closeMenus();
     discardChanges();
@@ -215,6 +247,8 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
       method: "POST",
       body: JSON.stringify({ url }),
     }).then((r) => r.json());
+
+    invalidateQueries();
 
     router.push(`/resources/${data.asset_id}`);
   }
@@ -250,7 +284,7 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
       {/** Modal for deletion */}
 
       <Dialog
-        open={!!deletion?.state}
+        open={deletion && ["confirm", "deleting"].includes(deletion.state)}
         onOpenChange={handleOnDeletionOpenChange}
       >
         <DialogContent data-exclude-close-on-click={true}>
@@ -260,8 +294,14 @@ const MediaViewer = ({ resource }: { resource: CloudinaryResource }) => {
             </DialogTitle>
           </DialogHeader>
           <DialogFooter className="justify-center sm:justify-center">
-            <Button variant="destructive">
-              <Trash2 className="h-4 w-4 mr-2" /> Delete
+            <Button variant="destructive" onClick={handleOnDelete}>
+              {deletion?.state === "deleting" && (
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              )}
+              {deletion?.state !== "deleting" && (
+                <Trash2 className="h-4 w-4 mr-2" />
+              )}
+              Delete
             </Button>
           </DialogFooter>
         </DialogContent>

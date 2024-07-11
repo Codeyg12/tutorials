@@ -10,7 +10,8 @@ cloudinary.config({
 
 async function Resource({ params }: { params: { assetId: string } }) {
   const { resources } = await cloudinary.api.resources_by_asset_ids(
-    params.assetId
+    params.assetId,
+    { tags: true }
   );
   return <MediaViewer resource={resources[0]} />;
 }

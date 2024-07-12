@@ -2,7 +2,14 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Plus, X, Save, Loader2 } from "lucide-react";
+import {
+  Plus,
+  X,
+  Save,
+  Loader2,
+  SquareStack,
+  LayoutPanelLeft,
+} from "lucide-react";
 
 import CldImage from "@/components/CldImage";
 import Container from "@/components/Container";
@@ -84,7 +91,10 @@ const MediaGallery = ({
 
     const { data } = await fetch("/api/upload", {
       method: "POST",
-      body: JSON.stringify({ url: creation.url }),
+      body: JSON.stringify({
+        url: creation.url,
+        tags: [String(process.env.NEXT_PUBLIC_CLOUDINARY_CREATIONS_TAG)],
+      }),
     }).then((r) => r.json());
 
     addResources([data]);
@@ -174,11 +184,13 @@ const MediaGallery = ({
                   <DropdownMenuGroup>
                     {selected.length === 1 && (
                       <DropdownMenuItem onClick={handleOnCreateAnimation}>
+                        <SquareStack className="w-4 h-4 mr-2" />
                         <span>Animation</span>
                       </DropdownMenuItem>
                     )}
                     {selected.length > 1 && (
                       <DropdownMenuItem onClick={handleOnCreateCollage}>
+                        <LayoutPanelLeft className="w-4 h-4 mr-2" />
                         <span>Collage</span>
                       </DropdownMenuItem>
                     )}

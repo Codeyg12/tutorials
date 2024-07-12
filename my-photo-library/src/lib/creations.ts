@@ -95,3 +95,19 @@ export function getCollage(publicIds: Array<string>) {
   });
   return url;
 }
+
+export function getAnimation(publicIds: Array<string>) {
+  const url = getCldImageUrl({
+    src: publicIds[0],
+    width: 1200,
+    height: 1200,
+    crop: {
+      type: "fill",
+      source: true,
+      gravity: "center",
+    },
+    zoompan: 'loop',
+    version: Date.now(),
+  });
+  return url;
+}

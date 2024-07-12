@@ -27,7 +27,7 @@ import { CloudinaryResource } from "@/types/cloudinary";
 
 import { useResources } from "@/hooks/use-resource";
 import { getCldImageUrl } from "next-cloudinary";
-import { getCollage } from "@/lib/creations";
+import { getCollage, getAnimation } from "@/lib/creations";
 
 interface MediaGalleryProps {
   resources: Array<CloudinaryResource>;
@@ -56,6 +56,14 @@ const MediaGallery = ({
       state: "created",
       url: getCollage(selected),
       type: "collage",
+    });
+  }
+
+  function handleOnCreateAnimation() {
+    setCreation({
+      state: "created",
+      url: getAnimation(selected),
+      type: "animation",
     });
   }
 
@@ -116,10 +124,6 @@ const MediaGallery = ({
               <CldImage
                 width={1200}
                 height={1200}
-                crop={{
-                  type: "fill",
-                  source: true,
-                }}
                 src={creation.url}
                 alt="Creation"
                 preserveTransformations
@@ -128,10 +132,10 @@ const MediaGallery = ({
           )}
           <DialogFooter className="justify-end sm:justify-end">
             <Button onClick={handleOnSaveCreation}>
-              {creation?.state !== "saving" && (
+              {creation?.state === "saving" && (
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
               )}
-              {creation?.state === "saving" && (
+              {creation?.state !== "saving" && (
                 <Save className="h-4 w-4 mr-2" />
               )}
               Save to Library
@@ -168,6 +172,11 @@ const MediaGallery = ({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
                   <DropdownMenuGroup>
+                    {selected.length === 1 && (
+                      <DropdownMenuItem onClick={handleOnCreateAnimation}>
+                        <span>Animation</span>
+                      </DropdownMenuItem>
+                    )}
                     {selected.length > 1 && (
                       <DropdownMenuItem onClick={handleOnCreateCollage}>
                         <span>Collage</span>

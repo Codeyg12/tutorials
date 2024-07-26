@@ -36,5 +36,7 @@ function completeOrder(orderId: number) {
   return finishedPizza;
 }
 
+addNewPizza('Meat Lovers', 10)
+
 placeOrder("Cheese");
 completeOrder(1);

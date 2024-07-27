@@ -3,7 +3,13 @@ type Pizza = {
   price: number;
 };
 
-const menu = [
+type Order = {
+  id: number;
+  pizza: Pizza;
+  status: string;
+};
+
+const menu: Array<Pizza> = [
   { name: "Margherita", price: 8 },
   { name: "Pepperoni", price: 10 },
   { name: "Cheese", price: 7 },
@@ -12,7 +18,7 @@ const menu = [
 
 let cashInRegister = 100;
 let orderId = 1;
-const orderQueue = [];
+const orderQueue: Array<Order> = [];
 
 function addNewPizza(newPizza: Pizza) {
   menu.push(newPizza);
@@ -36,7 +42,7 @@ function completeOrder(orderId: number) {
   return finishedPizza;
 }
 
-addNewPizza('Meat Lovers', 10)
+addNewPizza("Meat Lovers", 10);
 
 placeOrder("Cheese");
 completeOrder(1);

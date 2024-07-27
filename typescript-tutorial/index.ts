@@ -18,7 +18,7 @@ const menu: Array<Pizza> = [
 
 let cashInRegister = 100;
 let orderId = 1;
-const orderQueue: Array<Order> = [];
+const orderQueue: Order[] = [];
 
 function addNewPizza(newPizza: Pizza) {
   menu.push(newPizza);
@@ -37,12 +37,13 @@ function placeOrder(pizzaName: string) {
 }
 
 function completeOrder(orderId: number) {
-  const finishedPizza = orderQueue.find((pizza) => pizza.id === orderId);
-  finishedPizza.status = "completed";
-  return finishedPizza;
+  const order = orderQueue.find((pizza) => pizza.id === orderId);
+  if (!order) return;
+  order.status = "completed";
+  return order;
 }
 
-addNewPizza("Meat Lovers", 10);
+// addNewPizza("Meat Lovers", 10);
 
 placeOrder("Cheese");
 completeOrder(1);

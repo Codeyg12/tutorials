@@ -21,11 +21,11 @@ let cashInRegister = 100;
 let orderId = 1;
 const orderQueue: Order[] = [];
 
-function addNewPizza(newPizza: Pizza) {
+function addNewPizza(newPizza: Pizza): void {
   menu.push(newPizza);
 }
 
-function placeOrder(pizzaName: string) {
+function placeOrder(pizzaName: string): Order | undefined {
   const orderedPizza = menu.find((pizza) => pizza.name === pizzaName);
   if (!orderedPizza) {
     console.error(`${pizzaName} does not exist in the menu`);
@@ -41,14 +41,14 @@ function placeOrder(pizzaName: string) {
   return newOrder;
 }
 
-function completeOrder(orderId: number) {
+function completeOrder(orderId: number): Order | undefined {
   const order = orderQueue.find((pizza) => pizza.id === orderId);
   if (!order) return;
   order.status = "completed";
   return order;
 }
 
-function getPizzaDetail(identifier: string | number) {
+function getPizzaDetail(identifier: string | number): Pizza | undefined {
   if (typeof identifier === "string") {
     return menu.find(
       (pizza) => pizza.name.toLowerCase() === identifier.toLowerCase()

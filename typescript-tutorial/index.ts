@@ -6,7 +6,7 @@ type Pizza = {
 type Order = {
   id: number;
   pizza: Pizza;
-  status: string;
+  status: "ordered" | "completed";
 };
 
 const menu: Array<Pizza> = [
@@ -31,7 +31,11 @@ function placeOrder(pizzaName: string) {
     return;
   }
   cashInRegister += orderedPizza.price;
-  const newOrder = { pizza: orderedPizza, status: "ordered", id: orderId++ };
+  const newOrder: Order = {
+    id: orderId++,
+    pizza: orderedPizza,
+    status: "ordered",
+  };
   orderQueue.push(newOrder);
   return newOrder;
 }

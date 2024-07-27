@@ -1,4 +1,5 @@
 type Pizza = {
+  id: number;
   name: string;
   price: number;
 };
@@ -10,10 +11,10 @@ type Order = {
 };
 
 const menu: Array<Pizza> = [
-  { name: "Margherita", price: 8 },
-  { name: "Pepperoni", price: 10 },
-  { name: "Cheese", price: 7 },
-  { name: "Veggie", price: 8 },
+  { id: 1, name: "Margherita", price: 8 },
+  { id: 2, name: "Pepperoni", price: 10 },
+  { id: 3, name: "Cheese", price: 7 },
+  { id: 4, name: "Veggie", price: 8 },
 ];
 
 let cashInRegister = 100;
@@ -45,6 +46,16 @@ function completeOrder(orderId: number) {
   if (!order) return;
   order.status = "completed";
   return order;
+}
+
+function getPizzaDetail(identifier: string | number) {
+  if (typeof identifier === "string") {
+    return menu.find(
+      (pizza) => pizza.name.toLowerCase() === identifier.toLowerCase()
+    );
+  } else {
+    return menu.find((pizza) => pizza.id === identifier);
+  }
 }
 
 // addNewPizza("Meat Lovers", 10);

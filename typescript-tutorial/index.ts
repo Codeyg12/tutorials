@@ -10,18 +10,20 @@ type Order = {
   status: "ordered" | "completed";
 };
 
+let pizzaItemId = 1;
+let cashInRegister = 100;
+const orderQueue: Order[] = [];
+let orderId = 1;
+
 const menu: Array<Pizza> = [
-  { id: 1, name: "Margherita", price: 8 },
-  { id: 2, name: "Pepperoni", price: 10 },
-  { id: 3, name: "Cheese", price: 7 },
-  { id: 4, name: "Veggie", price: 8 },
+  { id: pizzaItemId++, name: "Margherita", price: 8 },
+  { id: pizzaItemId++, name: "Pepperoni", price: 10 },
+  { id: pizzaItemId++, name: "Cheese", price: 7 },
+  { id: pizzaItemId++, name: "Veggie", price: 8 },
 ];
 
-let cashInRegister = 100;
-let orderId = 1;
-const orderQueue: Order[] = [];
-
 function addNewPizza(newPizza: Pizza): void {
+  newPizza.id = pizzaItemId++;
   menu.push(newPizza);
 }
 

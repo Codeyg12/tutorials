@@ -22,9 +22,13 @@ const menu: Array<Pizza> = [
   { id: pizzaItemId++, name: "Veggie", price: 8 },
 ];
 
-function addNewPizza(newPizza: Pizza): void {
-  newPizza.id = pizzaItemId++;
+function addNewPizza(pizzaObj: Omit<Pizza, "id">): Pizza {
+  const newPizza: Pizza = {
+    id: pizzaItemId++,
+    ...pizzaObj,
+  };
   menu.push(newPizza);
+  return newPizza;
 }
 
 function placeOrder(pizzaName: string): Order | undefined {
@@ -64,3 +68,5 @@ function getPizzaDetail(identifier: string | number): Pizza | undefined {
 
 placeOrder("Cheese");
 completeOrder(1);
+
+addNewPizza({ name: "Chicken Bacon Ranch", price: 20 });

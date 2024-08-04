@@ -1,4 +1,5 @@
-import { state } from "../state/globalStateManager.js";
+import { state, statePropsEnum } from "../state/globalStateManager.js";
+import { makeBlink } from "./entitySharedLogic.js";
 
 export function makePlayer(k) {
   return k.make([
@@ -127,6 +128,31 @@ export function makePlayer(k) {
         this.onHeadbutt(() => {
           this.play("fall");
         });
+
+        this.on("heal", () => {
+          state.set(statePropsEnum.playerHp, this.hp());
+        });
+
+        this.on("hurt", () => {
+          makeBlink(k, this);
+          if (this.hp() > 0) {
+            state.set(statePropsEnum.playerHp, this.hp());
+            return;
+          }
+
+          k.play("boom");
+          this.play("explode");
+          state.set(statePropsEnum.playerHp, state.current().maxPlayerHp);
+        });
+
+        this.onAnimEnd((anim) => {
+          if (anim === "explode") {
+            k.go("room1");
+          }
+        });
+      },
+      enableDoubleJump() {
+        this.numJumps = 2;
       },
     },
   ]);

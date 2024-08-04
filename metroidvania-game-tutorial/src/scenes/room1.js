@@ -1,7 +1,9 @@
 import { makeBoss } from "../entities/enemyBoss.js";
 import { makeDrone } from "../entities/enemyDrone.js";
+import { makeCartridge } from "../entities/healthCartridge.js";
 import { makePlayer } from "../entities/player.js";
 import { state } from "../state/globalStateManager.js";
+import { healthBar } from "../ui/healthBar.js";
 import {
   setBackgroundColor,
   setCameraControls,
@@ -63,6 +65,15 @@ export function room1(k, roomData) {
       const boss = map.add(makeBoss(k, k.vec2(position.x, position.y)));
       boss.setBehavior();
       boss.setEvents();
+      continue;
+    }
+
+    if (position.type === "cartridge") {
+      map.add(makeCartridge(k, k.vec2(position.x, position.y)));
     }
   }
+
+  healthBar.setEvents();
+  healthBar.trigger("update");
+  k.add(healthBar);
 }

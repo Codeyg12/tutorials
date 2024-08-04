@@ -1,3 +1,4 @@
+import { makeDrone } from "../entities/enemyDrone.js";
 import { makePlayer } from "../entities/player.js";
 import {
   setBackgroundColor,
@@ -47,6 +48,12 @@ export function room1(k, roomData) {
       player.setControls();
       player.setEvents();
       player.enablePassthrough();
+    }
+
+    if (position.type === "drone") {
+      const drone = map.add(makeDrone(k, k.vec2(position.x, position.y)));
+      drone.setBehavior();
+      drone.setEvents();
     }
   }
 }

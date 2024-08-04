@@ -12,7 +12,7 @@ import {
   setMapColliders,
 } from "./roomUtils.js";
 
-export function room1(k, roomData, previousSceneData) {
+export function room1(k, roomData, previousSceneData = { exitName: null }) {
   setBackgroundColor(k, "#a2aed5");
 
   k.camScale(4);

@@ -112,7 +112,13 @@ export function makePlayer(k) {
         boundValue,
         destinationName,
         previousSceneData = { exitName: null }
-      ) {},
+      ) {
+        k.onUpdate(() => {
+          if (this.pos.y > boundValue) {
+            k.go(destinationName, previousSceneData);
+          }
+        });
+      },
       setEvents() {
         this.onFall(() => {
           this.play("fall");

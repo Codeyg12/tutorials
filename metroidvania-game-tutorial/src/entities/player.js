@@ -1,8 +1,8 @@
 import { state } from "../state/globalStateManager.js";
 
-export function makePlayer(k, initialPos) {
+export function makePlayer(k) {
   return k.make([
-    k.pos(initialPos),
+    k.pos(),
     k.sprite("player"),
     k.area({
       shape: new k.Rect(k.vec2(0, 18), 12, 12),
@@ -16,6 +16,17 @@ export function makePlayer(k, initialPos) {
     {
       speed: 150,
       isAttacking: false,
+      setPosition(x, y) {
+        this.pos.x = x;
+        this.pos.y = y;
+      },
+      enablePassthrough() {
+        this.onBeforePhysicsResolve((collision) => {
+          if (collision.target.is("passthrough") && this.isJumping()) {
+            collision.preventResolution();
+          }
+        });
+      },
       setControls() {
         this.controlHandlers = [];
 
@@ -32,10 +43,80 @@ export function makePlayer(k, initialPos) {
               this.isGrounded()
             ) {
               this.isAttacking = true;
-              this.add([k.pos(this.flipX ? -25 : 0, 10)]);
+              this.add([
+                k.pos(this.flipX ? -25 : 0, 10),
+                k.area({
+                  shape: new k.Rect(k.vec2(0), 25, 10),
+                }),
+                "sword-hitbox",
+              ]);
+              this.play("attack");
+
+              this.onAnimEnd((anim) => {
+                if (anim === "attack") {
+                  const swordHitbox = k.get("sword-hitbox", {
+                    recursive: true,
+                  })[0];
+                  if (swordHitbox) k.destroy(swordHitbox);
+                  this.isAttacking = false;
+                  this.play("idle");
+                }
+              });
             }
           })
         );
+
+        this.controlHandlers.push(
+          k.onKeyDown((key) => {
+            if (key === "left" && !this.isAttacking) {
+              if (this.curAnim() !== "run" && this.isGrounded()) {
+                this.play("run");
+              }
+              this.flipX = true;
+              this.move(-this.speed, 0);
+              return;
+            }
+
+            if (key === "right" && !this.isAttacking) {
+              if (this.curAnim() !== "run" && this.isGrounded()) {
+                this.play("run");
+              }
+              this.flipX = false;
+              this.move(this.speed, 0);
+              return;
+            }
+          })
+        );
+
+        this.controlHandlers.push(
+          k.onKeyRelease(() => {
+            if (
+              this.curAnim() !== "idle" &&
+              this.curAnim() !== "jump" &&
+              this.curAnim() !== "fall" &&
+              this.curAnim() !== "attack"
+            ) {
+              this.play("idle");
+            }
+          })
+        );
+      },
+      setEvents() {
+        this.onFall(() => {
+          this.play("fall");
+        });
+
+        this.onFallOff(() => {
+          this.play("fall");
+        });
+
+        this.onGround(() => {
+          this.play("idle");
+        });
+
+        this.onHeadbutt(() => {
+          this.play("fall");
+        });
       },
     },
   ]);
